@@ -9,7 +9,7 @@ struct ContentView: View {
         VStack {
             Text("현재 시간")
             Text("\(currentTime.toKoreanTime())")
-                .font(.largeTitle)
+                .aggro(.bold, size: 30)
                 .onReceive(timer) {
                     self.currentTime = $0
                 }
