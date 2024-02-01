@@ -8,19 +8,19 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Hangeul_Watch",
+    name: "TokTakTokTak",
     platforms: [
         .iOS("16.0")
     ],
     products: [
         .iOSApplication(
-            name: "Hangeul_Watch",
+            name: "TokTakTokTak",
             targets: ["AppModule"],
-            bundleIdentifier: "com.yuseong.com.Hangeul-Watch",
+            bundleIdentifier: "com.yuseong.com.TokTakTokTak",
             teamIdentifier: "Q6CK9777WL",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .moon),
+            appIcon: .placeholder(icon: .flower),
             accentColor: .presetColor(.red),
             supportedDeviceFamilies: [
                 .pad,
