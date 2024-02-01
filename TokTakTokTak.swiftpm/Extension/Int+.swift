@@ -30,7 +30,10 @@ extension Int {
             let tens = self / 10
             let ones = self % 10
             
-            return tens.sinoKoreanTime! + "십" + (ones != 0 ? ones.sinoKoreanTime! : "")
+            let tensKorean = (tens != 1 ? tens.sinoKoreanTime!: "") + "십"
+            let onesKorean = (ones != 0 ? ones.sinoKoreanTime! : "")
+            
+            return tensKorean + onesKorean
         }
     }
     
@@ -56,7 +59,10 @@ extension Int {
             let tens = self - self % 10
             let ones = self % 10
             
-            return tens.nativeKoreanTime! + ones.nativeKoreanTime!
+            let tensKorean = (tens != 0 ? "" : tens.sinoKoreanTime!)
+            let onesKorean = (ones != 0 ? ones.nativeKoreanTime! : "")
+            
+            return tensKorean + onesKorean
         }
     }
 }

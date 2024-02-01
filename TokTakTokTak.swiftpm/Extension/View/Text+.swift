@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-extension Text {
+extension View {
     func aggro(_ name: Aggro, size: CGFloat) -> some View {
         self.modifier(FontModifier(name: name.rawValue, size: size))
     }
