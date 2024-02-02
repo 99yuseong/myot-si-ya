@@ -51,6 +51,7 @@ struct ContentView: View {
                             IconButton(Icon.originalSize) {
                                 withAnimation {
                                     isScreenMode = false
+                                    isUpdatingBrightness = false
                                     UIApplication.shared.isIdleTimerDisabled = false
                                 }
                             }
