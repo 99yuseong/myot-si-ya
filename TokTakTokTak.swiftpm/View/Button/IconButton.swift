@@ -13,7 +13,8 @@ struct IconButton: View {
     
     private var name: String = ""
     private var nameForToggle: String?
-    private var imgSize: CGFloat = 32
+    private var contentSize: CGFloat = 32
+    private var btnSize: CGFloat = 48
     private var content: String?
 
     private var action: () -> Void
@@ -21,20 +22,24 @@ struct IconButton: View {
     public init(
         _ name: String = "",
         _ nameForToggle: String? = nil,
-        imgSize: CGFloat = 32,
+        contentSize: CGFloat = 32,
+        btnSize: CGFloat = 48,
         action: @escaping () -> Void) {
         
         self.name = name
         self.nameForToggle = nameForToggle
-        self.imgSize = imgSize
+        self.contentSize = contentSize
+        self.btnSize = btnSize
         self.action = action
     }
     
     public init(
         text: String,
+        contentSize: CGFloat = 32,
         action: @escaping () -> Void) {
         
         self.content = text
+        self.contentSize = contentSize
         self.action = action
     }
     
@@ -45,14 +50,14 @@ struct IconButton: View {
         } label: {
             if let content = content {
                 Text(content)
-                    .font(.system(size: 32, weight: .thin))
+                    .font(.system(size: contentSize, weight: .thin))
                     .foregroundStyle(Color.primary)
             } else {
                 Image(systemName: nameForToggle == nil ? name : isToggled ? nameForToggle! : name)
-                    .font(.system(size: imgSize, weight: .thin))
+                    .font(.system(size: contentSize, weight: .thin))
                     .foregroundStyle(Color.primary)
             }
         }
-        .frame(width: 48, height: 48)
+        .frame(width: btnSize, height: btnSize)
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import AVFoundation
 
-class AudioPlayer {
+class AudioService {
     private var player: AVAudioPlayer?
     private var isMuted: Bool = false
 

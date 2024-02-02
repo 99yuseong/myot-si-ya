@@ -17,11 +17,17 @@ extension Date {
         return formatter.string(from: self)
     }
     
-    func toKoreanTime() -> String {
-        "\(toKoreanHours())시 \(toKoreanMinutes())분 \(toKoreanSeconds())초"
+    func toAmPm() -> String {
+        let hour = Calendar.current.component(.hour, from: self)
+        
+        return hour > 12 ? "PM" : "AM"
     }
     
-    func toAmPm() -> String {
+    func toKoreanTime() -> String {
+        "\(toKoreanAmPm()) \(toKoreanHours())시 \(toKoreanMinutes())분 \(toKoreanSeconds())초"
+    }
+    
+    func toKoreanAmPm() -> String {
         let hour = Calendar.current.component(.hour, from: self)
         
         return hour > 12 ? "오후" : "오전"

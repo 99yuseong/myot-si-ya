@@ -5,8 +5,9 @@ struct ContentView: View {
     
     @State private var currentTime = Date()
     @State private var isTimerRunning: Bool = false
+    @State private var isPresentingSheet = false
     
-    private let player = AudioPlayer()
+    private let player = AudioService()
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -15,8 +16,8 @@ struct ContentView: View {
             
             VStack(alignment: .leading, spacing: 24) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("\"똑딱똑딱\" - Hangeul Clock")
-                        .aggro(.bold, size: 32)
+                    Text("\"똑딱똑딱\" : Hangeul Clock")
+                        .aggro(.bold, size: 24)
                     Text("is a clock app that marks\nthe current time in Korean.")
                         .aggro(.light, size: 17)
                 }
@@ -47,7 +48,10 @@ struct ContentView: View {
                         print("fullsize btn tap")
                     }
                     IconButton(text: "Aa") {
-                        print("language btn tap")
+                        isPresentingSheet = true
+                    }
+                    .sheet(isPresented: $isPresentingSheet) {
+                        KoreanSheetView()
                     }
                 }
                 Spacer()
@@ -59,7 +63,7 @@ struct ContentView: View {
             Spacer()
             VStack(alignment: .trailing, spacing: -18) {
                 Spacer()
-                Text("\(currentTime.toAmPm())")
+                Text("\(currentTime.toKoreanAmPm())")
                 HStack(spacing: 0) {
                     Text("\(currentTime.toKoreanHours())")
                     Text("시")
@@ -78,7 +82,7 @@ struct ContentView: View {
                 .onReceive(timer) {
                     currentTime = $0
                     if !isTimerRunning {
-                        player.playAudio(fileName: "clock2")
+                        player.playAudio(fileName: "clock1")
                         isTimerRunning.toggle()
                     }
                 }

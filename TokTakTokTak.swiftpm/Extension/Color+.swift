@@ -10,6 +10,8 @@ import SwiftUI
 extension Color {
     static let bgDark = Color(hex: "#121212")
     static let bgLight = Color(hex: "#FFFFFF")
+    static let gray3Light = Color(hex: "#48484A")
+    static let gray3Dark = Color(hex: "#48484A")
 }
 
 extension Color {
