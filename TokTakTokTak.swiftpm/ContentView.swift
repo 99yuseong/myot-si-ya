@@ -54,6 +54,7 @@ struct ContentView: View {
                                     UIApplication.shared.isIdleTimerDisabled = false
                                 }
                             }
+                            .animation(.easeInOut, value: brightness)
                             .foregroundStyle(brightness < 0.2 ? .primary : .tertiary)
                             
                             IconButton(Icon.brightness) {
@@ -62,6 +63,7 @@ struct ContentView: View {
                                 }
                                 setTimer()
                             }
+                            .animation(.easeInOut, value: brightness)
                             .foregroundStyle(isUpdatingBrightness || brightness < 0.2 ? .primary : .tertiary)
                         }
                         .transition(.opacity)
@@ -138,6 +140,7 @@ struct ContentView: View {
                         Text("초")
                     }
                     .foregroundStyle(brightness < 0.2 ? .primary : .tertiary)
+                    .animation(.easeInOut, value: brightness)
                 }
                 .onReceive(timer) {
                     currentTime = $0
