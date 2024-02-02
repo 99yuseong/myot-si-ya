@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct KoreanSheetView: View {
+struct AboutMainInfoSheet: View {
     
     private let speechService = SpeechService()
     private let date = Date()
@@ -95,5 +95,5 @@ struct KoreanSheetView: View {
 }
 
 #Preview {
-    KoreanSheetView()
+    AboutMainInfoSheet()
 }

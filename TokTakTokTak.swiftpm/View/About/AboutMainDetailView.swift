@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainDetailView: View {
+struct AboutMainDetailView: View {
     
     @Binding var currentTime: Date
     @Binding var isScreenMode: Bool
@@ -65,7 +65,7 @@ struct MainDetailView: View {
                     isPresentingSheet = true
                 }
                 .sheet(isPresented: $isPresentingSheet) {
-                    KoreanSheetView()
+                    AboutMainInfoSheet()
                 }
             }
             .foregroundStyle(.primary)

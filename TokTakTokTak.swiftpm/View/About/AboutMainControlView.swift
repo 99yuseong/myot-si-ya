@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct MainControlView: View {
+struct AboutMainControlView: View {
     
     @Binding var isScreenMode: Bool
     @Binding var isUpdatingBrightness: Bool

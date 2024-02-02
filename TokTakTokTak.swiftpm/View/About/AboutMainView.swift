@@ -2,7 +2,7 @@ import SwiftUI
 import UIKit
 import Combine
 
-struct ContentView: View {
+struct AboutMainView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @State private var currentTime = Date()
@@ -28,7 +28,7 @@ struct ContentView: View {
                     VStack {
                         if isScreenMode {
                             HStack {
-                                MainControlView(
+                                AboutMainControlView(
                                     isScreenMode: $isScreenMode,
                                     isUpdatingBrightness: $isUpdatingBrightness,
                                     brightness: $brightness,
@@ -40,7 +40,7 @@ struct ContentView: View {
                             }
                         } else {
                             HStack {
-                                MainDetailView(
+                                AboutMainDetailView(
                                     currentTime: $currentTime,
                                     isScreenMode: $isScreenMode,
                                     isPresentingSheet: $isPresentingSheet,
@@ -56,7 +56,7 @@ struct ContentView: View {
                         
                         HStack {
                             Spacer()
-                            MainClockView(
+                            AboutMainClockView(
                                 currentTime: $currentTime,
                                 isTimerRunning: $isTimerRunning,
                                 brightness: $brightness,
@@ -70,7 +70,7 @@ struct ContentView: View {
                         if isScreenMode {
                             VStack {
                                 Spacer()
-                                MainControlView(
+                                AboutMainControlView(
                                     isScreenMode: $isScreenMode,
                                     isUpdatingBrightness: $isUpdatingBrightness,
                                     brightness: $brightness,
@@ -81,7 +81,7 @@ struct ContentView: View {
                             }
                         } else {
                             VStack {
-                                MainDetailView(
+                                AboutMainDetailView(
                                     currentTime: $currentTime,
                                     isScreenMode: $isScreenMode,
                                     isPresentingSheet: $isPresentingSheet,
@@ -97,7 +97,7 @@ struct ContentView: View {
                         
                         VStack {
                             Spacer()
-                            MainClockView(
+                            AboutMainClockView(
                                 currentTime: $currentTime,
                                 isTimerRunning: $isTimerRunning,
                                 brightness: $brightness,
@@ -112,7 +112,14 @@ struct ContentView: View {
         .edgesIgnoringSafeArea(.all)
         .background(colorScheme == .light ? Color.bgLight : Color.bgDark)
         .onRotate { newOrientation in
-            isPortrait = newOrientation.isPortrait
+            switch newOrientation {
+            case .portrait, .portraitUpsideDown:
+                isPortrait = true
+            case .landscapeLeft, .landscapeRight:
+                isPortrait = false
+            default:
+                break
+            }
         }
     }
 }

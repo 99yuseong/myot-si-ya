@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainClockView: View {
+struct AboutMainClockView: View {
     
     @Binding var currentTime: Date
     @Binding var isTimerRunning: Bool
