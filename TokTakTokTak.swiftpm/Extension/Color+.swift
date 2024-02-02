@@ -12,6 +12,7 @@ extension Color {
     static let bgLight = Color(hex: "#FFFFFF")
     static let gray3Light = Color(hex: "#48484A")
     static let gray3Dark = Color(hex: "#48484A")
+    static let quaternaryDark = Color(hex: "#EBEBF5").opacity(0.16)
 }
 
 extension Color {

@@ -51,11 +51,9 @@ struct IconButton: View {
             if let content = content {
                 Text(content)
                     .font(.system(size: contentSize, weight: .thin))
-                    .foregroundStyle(Color.primary)
             } else {
                 Image(systemName: nameForToggle == nil ? name : isToggled ? nameForToggle! : name)
                     .font(.system(size: contentSize, weight: .thin))
-                    .foregroundStyle(Color.primary)
             }
         }
         .frame(width: btnSize, height: btnSize)
