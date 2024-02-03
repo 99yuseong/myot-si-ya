@@ -19,20 +19,20 @@ struct AboutMainDetailView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 24) {
             VStack(alignment: .leading, spacing: 8) {
-                Text("\"똑딱똑딱\" : Hangeul Clock")
-                    .aggro(.bold, size: 24)
-                Text("is a clock app that marks\nthe current time in Korean.")
+                Text("몇시:몇분:몇초")
+                    .aggro(.bold, size: 32)
+                Text("is a Hangeul clock app that marks\nthe current time in Korean.")
                     .aggro(.light, size: 17)
             }
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text("똑딱똑딱")
+                    Text("몇시몇분몇초")
                         .aggro(.medium, size: 15)
-                    Text("[ttok ttak ttok ttak]")
+                    Text("[myot-si myot-boon myot-cho]")
                         .foregroundStyle(.tertiary)
                 }
-                Text("is an onomatopoeic words\n of the clock ticking sound.")
+                Text("means what hour, what minute and what second.\nIt is a phrase in Korean asking for the exact time.")
             }
             .aggro(.light, size: 15)
             

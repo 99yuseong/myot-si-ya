@@ -8,19 +8,19 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "TokTakTokTak",
+    name: "SiBunCho",
     platforms: [
         .iOS("16.0")
     ],
     products: [
         .iOSApplication(
-            name: "TokTakTokTak",
+            name: "SiBunCho",
             targets: ["AppModule"],
             bundleIdentifier: "com.yuseong.com.TokTakTokTak",
             teamIdentifier: "Q6CK9777WL",
             displayVersion: "1.0",
             bundleVersion: "1",
-            appIcon: .placeholder(icon: .flower),
+            appIcon: .asset("AppIcon"),
             accentColor: .presetColor(.red),
             supportedDeviceFamilies: [
                 .pad,
@@ -31,7 +31,8 @@ let package = Package(
                 .landscapeRight,
                 .landscapeLeft,
                 .portraitUpsideDown(.when(deviceFamilies: [.pad]))
-            ]
+            ],
+            appCategory: .lifestyle
         )
     ],
     targets: [
