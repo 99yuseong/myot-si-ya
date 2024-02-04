@@ -10,7 +10,7 @@ import Combine
 
 struct ContentView: View {
     @State private var isTabBarVisible: Bool = false
-    @State private var selectedTab = 0
+    @State private var selectedTab = 3
     @State private var timerCancellable: AnyCancellable?
     
     var body: some View {
@@ -51,7 +51,7 @@ struct ContentView: View {
                     .tag(2)
                     .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
                 
-                Text("두 번째 탭")
+                TimerMainView()
                     .tabItem {
                         Image(systemName: Icon.timer)
                             .font(.system(size: 32, weight: .thin))
