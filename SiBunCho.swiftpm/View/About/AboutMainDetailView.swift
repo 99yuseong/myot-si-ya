@@ -46,13 +46,13 @@ struct AboutMainDetailView: View {
             HStack(spacing: 16) {
                 if isMuted {
                     IconButton(Icon.soundOff) {
-                        isMuted.toggle()
-                        player.toggleSound()
+                        isMuted = false
+                        player.unmute()
                     }
                 } else {
                     IconButton(Icon.sound) {
-                        isMuted.toggle()
-                        player.toggleSound()
+                        isMuted = true
+                        player.mute()
                     }
                 }
                 IconButton(Icon.fullSize) {

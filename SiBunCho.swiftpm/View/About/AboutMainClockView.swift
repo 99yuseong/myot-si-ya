@@ -12,6 +12,7 @@ struct AboutMainClockView: View {
     @Binding var currentTime: Date
     @Binding var isTimerRunning: Bool
     @Binding var brightness: Double
+    @Binding var isMuted: Bool
     
     let player: AudioService
     
@@ -38,6 +39,7 @@ struct AboutMainClockView: View {
                 currentTime = $0
                 if !isTimerRunning {
                     player.playAudio(fileName: "clock1")
+                    isMuted ? player.mute() : player.unmute()
                     isTimerRunning.toggle()
                 }
             }

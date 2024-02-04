@@ -6,7 +6,7 @@ struct AboutMainView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @State private var currentTime = Date()
-    @State private var isMuted: Bool = false
+    @State private var isMuted: Bool = true
     @State private var isTimerRunning: Bool = false
     @State private var isPresentingSheet: Bool = false
     @State private var isScreenMode: Bool = false
@@ -14,12 +14,11 @@ struct AboutMainView: View {
     @State private var isPortrait: Bool = false
     
     @State private var timerCancellable: AnyCancellable?
-    
+    @State private var mainTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var brightness: Double = Double(UIScreen.main.brightness)
 
     private let player = AudioService()
     
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         ZStack {
@@ -60,6 +59,7 @@ struct AboutMainView: View {
                                 currentTime: $currentTime,
                                 isTimerRunning: $isTimerRunning,
                                 brightness: $brightness,
+                                isMuted: $isMuted,
                                 player: player
                             )
                             .padding([.bottom, .trailing], 100)
@@ -101,6 +101,7 @@ struct AboutMainView: View {
                                 currentTime: $currentTime,
                                 isTimerRunning: $isTimerRunning,
                                 brightness: $brightness,
+                                isMuted: $isMuted,
                                 player: player
                             )
                             .padding([.top, .bottom, .trailing], 100)

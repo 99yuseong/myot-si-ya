@@ -34,8 +34,13 @@ class AudioService {
         player = nil
     }
     
-    func toggleSound() {
-        isMuted.toggle()
-        player?.volume = isMuted ? 0.0 : 0.2
+    func mute() {
+        isMuted = true
+        player?.volume = 0.0
+    }
+    
+    func unmute() {
+        isMuted = false
+        player?.volume = 0.2
     }
 }
