@@ -45,7 +45,11 @@ struct AboutMainInfoSheet: View {
             }
             .aggro(.bold, size: 36)
             Spacer()
-            IconButton(Icon.sound, contentSize: 40, btnSize: 80) {
+            IconButton(
+                Icon.sound,
+                contentSize: 40,
+                btnSize: CGSize(width: 80, height: 80)
+            ) {
                 speechService.speakInKorean(date.toKoreanTime())
             }
         }

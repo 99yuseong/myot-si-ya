@@ -26,7 +26,7 @@ enum PickerType {
     }
 }
 
-struct KoreanTimePickerView: UIViewRepresentable {
+struct TimePickerView: UIViewRepresentable {
     
     @Binding var selectedItem: Int
     @State var section = 1000
@@ -37,9 +37,15 @@ struct KoreanTimePickerView: UIViewRepresentable {
     let type: PickerType
     
     func makeUIView(context: Context) -> UIPickerView {
-        let pickerView = UIPickerView()
+        let pickerView = CustomUIPickerView(type: type)
         pickerView.dataSource = context.coordinator
         pickerView.delegate = context.coordinator
+        switch type {
+        case .large:
+            pickerView.frame.size = CGSize(width: 228, height: 84 * 4)
+        case .small:
+            pickerView.frame.size = CGSize(width: 138, height: 48 * 4)
+        }
         return pickerView
     }
     
@@ -52,9 +58,9 @@ struct KoreanTimePickerView: UIViewRepresentable {
     }
     
     class Coordinator: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
-        var parent: KoreanTimePickerView
+        var parent: TimePickerView
         
-        init(_ pickerView: KoreanTimePickerView) {
+        init(_ pickerView: TimePickerView) {
             self.parent = pickerView
         }
         

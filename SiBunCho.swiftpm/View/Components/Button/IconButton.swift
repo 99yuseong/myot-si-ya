@@ -13,8 +13,8 @@ struct IconButton: View {
     
     private var name: String = ""
     private var nameForToggle: String?
-    private var contentSize: CGFloat = 32
-    private var btnSize: CGFloat = 48
+    private var contentSize: CGFloat
+    private var btnSize: CGSize
     private var content: String?
 
     private var action: () -> Void
@@ -23,7 +23,7 @@ struct IconButton: View {
         _ name: String = "",
         _ nameForToggle: String? = nil,
         contentSize: CGFloat = 32,
-        btnSize: CGFloat = 48,
+        btnSize: CGSize = CGSize(width: 48, height: 48),
         action: @escaping () -> Void) {
         
         self.name = name
@@ -36,10 +36,12 @@ struct IconButton: View {
     public init(
         text: String,
         contentSize: CGFloat = 32,
+        btnSize: CGSize = CGSize(width: 48, height: 48),
         action: @escaping () -> Void) {
         
         self.content = text
         self.contentSize = contentSize
+        self.btnSize = btnSize
         self.action = action
     }
     
@@ -56,6 +58,6 @@ struct IconButton: View {
                     .font(.system(size: contentSize, weight: .thin))
             }
         }
-        .frame(width: btnSize, height: btnSize)
+        .frame(width: btnSize.width, height: btnSize.height)
     }
 }

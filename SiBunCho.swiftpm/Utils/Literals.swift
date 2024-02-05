@@ -14,6 +14,10 @@ enum Icon {
     static var originalSize = "arrow.up.forward.and.arrow.down.backward"
     static var brightness = "sun.max.fill"
     static var chevronTop = "chevron.up"
+    static var playCircle = "play.circle"
+    static var play = "play"
+    static var playFill = "play.fill"
+    static var plus = "plus"
     
     static var about = "info.circle"
     static var global = "globe"
