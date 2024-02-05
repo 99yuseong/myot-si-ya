@@ -14,18 +14,18 @@ struct AboutMainClockView: View {
     @Binding var brightness: Double
     @Binding var isMuted: Bool
     
-    let player: AudioService
+    @State var timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
     
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    let player: AudioService
     
     var body: some View {
         VStack(alignment: .trailing, spacing: -18) {
             Text("\(currentTime.toKoreanAmPm())")
             HStack(spacing: 0) {
                 VStack(alignment: .trailing, spacing: -18) {
-                    Text("\(currentTime.toKoreanHours())")
-                    Text("\(currentTime.toKoreanMinutes())")
-                    Text("\(currentTime.toKoreanSeconds())")
+                    Text(hour())
+                    Text(minute())
+                    Text(second())
                 }
                 VStack(alignment: .trailing, spacing: -18) {
                     Text("시")
@@ -36,6 +36,7 @@ struct AboutMainClockView: View {
                 .animation(.easeInOut, value: brightness)
             }
             .onReceive(timer) {
+                print($0)
                 currentTime = $0
                 if !isTimerRunning {
                     player.playAudio(fileName: "clock1")
@@ -46,5 +47,23 @@ struct AboutMainClockView: View {
         }
         .aggro(.bold, size: 130)
         .foregroundColor(.primary)
+    }
+    
+    fileprivate func hour() -> String {
+        let hour = Calendar.current.component(.hour, from: currentTime)
+        
+        if hour == 0 {
+            return "열두"
+        }
+        
+        return currentTime.toKoreanHours()
+    }
+    
+    fileprivate func minute() -> String {
+        currentTime.toKoreanMinutes()
+    }
+    
+    fileprivate func second() -> String {
+        currentTime.toKoreanSeconds()
     }
 }

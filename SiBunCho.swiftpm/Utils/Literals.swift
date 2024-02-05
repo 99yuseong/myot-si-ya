@@ -18,6 +18,8 @@ enum Icon {
     static var play = "play"
     static var playFill = "play.fill"
     static var plus = "plus"
+    static var cancel = "xmark"
+    static var pause = "pause"
     
     static var about = "info.circle"
     static var global = "globe"

@@ -14,7 +14,6 @@ struct AboutMainView: View {
     @State private var isPortrait: Bool = false
     
     @State private var timerCancellable: AnyCancellable?
-    @State private var mainTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State private var brightness: Double = Double(UIScreen.main.brightness)
 
     private let player = AudioService()

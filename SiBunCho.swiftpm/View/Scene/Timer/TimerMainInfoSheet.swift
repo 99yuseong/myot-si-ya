@@ -1,13 +1,17 @@
 //
-//  KoreanSheetView.swift
-//  TokTakTokTak
+//  TimerMainInfoSheet.swift
 //
-//  Created by 남유성 on 2/2/24.
+//
+//  Created by 남유성 on 2/5/24.
 //
 
 import SwiftUI
 
-struct AboutMainInfoSheet: View {
+struct TimerMainInfoSheet: View {
+    
+    @Binding var selectedHour: Int
+    @Binding var selectedMinute: Int
+    @Binding var selectedSecond: Int
     
     private let speechService = SpeechService()
     private let date = Date()
@@ -16,29 +20,25 @@ struct AboutMainInfoSheet: View {
         HStack {
             VStack(alignment: .leading, spacing: 16) {
                 HStack(spacing: 0) {
-                    Text("\(date.toAmPm()) ")
-                        .foregroundStyle(.secondary)
-                    Text(date.toFormat("h"))
+                    Text("\(selectedHour)")
                     Text("h ")
                         .foregroundStyle(.secondary)
-                    Text(date.toFormat("m"))
+                    Text("\(selectedMinute)")
                     Text("m ")
                         .foregroundStyle(.secondary)
-                    Text(date.toFormat("s"))
+                    Text("\(selectedSecond)")
                     Text("s")
                         .foregroundStyle(.secondary)
                 }
                 
                 HStack(spacing: 0) {
-                    Text("\(date.toKoreanAmPm()) ")
+                    Text("\(selectedHour)")
+                    Text("시간 ")
                         .foregroundStyle(.secondary)
-                    Text(date.toKoreanHours())
-                    Text("시 ")
-                        .foregroundStyle(.secondary)
-                    Text(date.toKoreanMinutes())
+                    Text("\(selectedMinute)")
                     Text("분 ")
                         .foregroundStyle(.secondary)
-                    Text(date.toKoreanSeconds())
+                    Text("\(selectedSecond)")
                     Text("초")
                         .foregroundStyle(.secondary)
                 }
@@ -85,9 +85,7 @@ struct AboutMainInfoSheet: View {
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 16) {
-                    KoreanPronsListView("AM", "오전", "OJEON")
-                    KoreanPronsListView("PM", "오후", "OHU")
-                    KoreanPronsListView("Hour", "시", "SI")
+                    KoreanPronsListView("Hour", "시간", "SIGAN")
                     KoreanPronsListView("Minute", "분", "BUN")
                     KoreanPronsListView("Second", "초", "CHO")
                 }
@@ -96,8 +94,4 @@ struct AboutMainInfoSheet: View {
             .padding(.trailing, 60)
         }
     }
-}
-
-#Preview {
-    AboutMainInfoSheet()
 }

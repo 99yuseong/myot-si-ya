@@ -39,7 +39,7 @@ extension Int {
     
     var nativeKoreanTime: String? {
         switch self {
-        case 0: return "열두"
+        case 0: return "영"
         case 1: return "한"
         case 2: return "두"
         case 3: return "세"
