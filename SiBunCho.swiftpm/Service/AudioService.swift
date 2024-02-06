@@ -11,8 +11,8 @@ import AVFoundation
 class AudioService {
     private var player: AVAudioPlayer?
     private var isMuted: Bool = false
-
-    func playAudio(fileName: String) {
+    
+    func playAudio(fileName: String, playCount: Int = -1) {
         guard let url = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
             System.shared.log("파일을 찾을 수 없습니다.")
             return
@@ -20,7 +20,7 @@ class AudioService {
 
         do {
             player = try AVAudioPlayer(contentsOf: url)
-            player?.numberOfLoops = -1
+            player?.numberOfLoops = playCount == -1 ? -1 : playCount - 1
             player?.volume = 0.2
             player?.prepareToPlay()
             player?.play()

@@ -11,8 +11,8 @@ struct TimerMainView: View {
     @Environment(\.colorScheme) var colorScheme
     
     @State private var selectedHour = 0
-    @State private var selectedMinute = 5
-    @State private var selectedSecond = 0
+    @State private var selectedMinute = 0
+    @State private var selectedSecond = 1
     @State private var remainingTime = 0
     @State private var totalTime = 0
     

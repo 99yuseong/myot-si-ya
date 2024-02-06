@@ -36,7 +36,6 @@ struct AboutMainClockView: View {
                 .animation(.easeInOut, value: brightness)
             }
             .onReceive(timer) {
-                print($0)
                 currentTime = $0
                 if !isTimerRunning {
                     player.playAudio(fileName: "clock1")
