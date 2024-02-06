@@ -20,115 +20,116 @@ struct TimerMainView: View {
     
     @State private var isLinkActive = false
     @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @State private var isPortrait: Bool = false
         
     var body: some View {
         NavigationStack {
-            VStack {
-                HStack {
-                    VStack(alignment: .leading, spacing: 24) {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Hangeul Timer")
-                                .aggro(.bold, size: 32)
-                            Text("Set the time you want (~ 23h 59m 59s)\nand receive notification.")
-                                .aggro(.light, size: 17)
-                        }
-                        
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Timer will be activated in")
-                                .aggro(.light, size: 17)
-                            Text("\(selectedHour)h \(selectedMinute)m \(selectedSecond)s")
-                                .aggro(.medium, size: 20)
-                        }
-                        
-                        HStack(spacing: 16) {
-                            IconButton(text: "Aa") {
-                                isPresentingSheet = true
-                            }
-                            .sheet(isPresented: $isPresentingSheet) {
-                                TimerMainInfoSheet(
-                                    selectedHour: $selectedHour,
-                                    selectedMinute: $selectedMinute,
-                                    selectedSecond: $selectedSecond
-                                )
-                            }
-                            
-                            IconButton(
-                                text: "30s",
-                                btnSize: CGSize(width: 64, height: 48)
-                            ) {
-                                selectedHour = 0
-                                selectedMinute = 0
-                                selectedSecond = 30
-                            }
-                            
-                            IconButton(
-                                text: "5m"
-                            ) {
-                                selectedHour = 0
-                                selectedMinute = 5
-                                selectedSecond = 0
-                            }
-                            
-                            IconButton(text: "1h") {
-                                selectedHour = 1
-                                selectedMinute = 0
-                                selectedSecond = 0
-                            }
-                        }
-                        .foregroundStyle(.primary)
-                    }
-                    .transition(.opacity)
-                    Spacer()
-                }
-                .padding([.top, .leading], 100)
-                
-                Spacer()
-                    .frame(height: 48)
-                
-                HStack(spacing: 56) {
-                    ZStack {
-                        MultiTimerPickerView(
+            GeometryReader { gr in
+                VStack(spacing: 0) {
+                    HStack {
+                        TimerMainDetailView(
                             selectedHour: $selectedHour,
                             selectedMinute: $selectedMinute,
                             selectedSecond: $selectedSecond,
-                            type: .small
+                            isPresentingSheet: $isPresentingSheet
                         )
-                        
-                        VStack { // prevent touch
-                            Color.bgDark
-                                .contentShape(Rectangle())
-                                .frame(height: 42)
-                            
+                        .padding([.top, .leading], 100)
+                        Spacer()
+                    }
+                    
+                    VStack {
+                        if gr.size.width <= 834 { // ipad mini, 11-inch portrait
                             Spacer()
-                            
-                            Color.bgDark
-                                .contentShape(Rectangle())
-                                .frame(height: 42)
+                            VStack(spacing: 0) {
+                                MultiTimerPickerView(
+                                    selectedHour: $selectedHour,
+                                    selectedMinute: $selectedMinute,
+                                    selectedSecond: $selectedSecond,
+                                    type: .small
+                                )
+                                
+                                ControlButton(icon: Icon.plus) {
+                                    isLinkActive = true
+                                    totalTime = selectedHour * 3600 + selectedMinute * 60 + selectedSecond
+                                    remainingTime = selectedHour * 3600 + selectedMinute * 60 + selectedSecond
+                                }
+                                .navigationDestination(isPresented: $isLinkActive) {
+                                    TimerProgressView(
+                                        remainingTime: $remainingTime,
+                                        totalTime: $totalTime,
+                                        isLinkActive: $isLinkActive
+                                    )
+                                }
+                            }
+                        } else if gr.size.width <= 1133 { // ipad mini landscape, 12.9 inch portrait
+                            Spacer()
+                            HStack {
+                                MultiTimerPickerView(
+                                    selectedHour: $selectedHour,
+                                    selectedMinute: $selectedMinute,
+                                    selectedSecond: $selectedSecond,
+                                    type: .small
+                                )
+                                Spacer()
+                                
+                                ControlButton(icon: Icon.plus) {
+                                    isLinkActive = true
+                                    totalTime = selectedHour * 3600 + selectedMinute * 60 + selectedSecond
+                                    remainingTime = selectedHour * 3600 + selectedMinute * 60 + selectedSecond
+                                }
+                                .navigationDestination(isPresented: $isLinkActive) {
+                                    TimerProgressView(
+                                        remainingTime: $remainingTime,
+                                        totalTime: $totalTime,
+                                        isLinkActive: $isLinkActive
+                                    )
+                                }
+                            }
+                            .padding([.leading, .trailing], 100)
+                        } else {
+                            if gr.size.width >= 1366 {
+                                Spacer()
+                            }
+                            HStack(spacing: 0) {
+                                MultiTimerPickerView(
+                                    selectedHour: $selectedHour,
+                                    selectedMinute: $selectedMinute,
+                                    selectedSecond: $selectedSecond,
+                                    type: .large
+                                )
+                                Spacer()
+                                ControlButton(icon: Icon.plus) {
+                                    isLinkActive = true
+                                    totalTime = selectedHour * 3600 + selectedMinute * 60 + selectedSecond
+                                    remainingTime = selectedHour * 3600 + selectedMinute * 60 + selectedSecond
+                                }
+                                .navigationDestination(isPresented: $isLinkActive) {
+                                    TimerProgressView(
+                                        remainingTime: $remainingTime,
+                                        totalTime: $totalTime,
+                                        isLinkActive: $isLinkActive
+                                    )
+                                }
+                            }
+                            .padding([.leading, .trailing], gr.size.width >= 1366 ? 100 : 50)
                         }
-                        
-                    }
-                    .frame(height: 84 * 4)
-                        
-                
-                    ControlButton(icon: Icon.plus) {
-                        isLinkActive = true
-                        totalTime = selectedHour * 3600 + selectedMinute * 60 + selectedSecond
-                        remainingTime = selectedHour * 3600 + selectedMinute * 60 + selectedSecond
-                    }
-                    .navigationDestination(isPresented: $isLinkActive) {
-                        TimerProgressView(
-                            remainingTime: $remainingTime,
-                            totalTime: $totalTime,
-                            isLinkActive: $isLinkActive
-                        )
+                        Spacer()
                     }
                 }
-                .padding([.leading, .trailing], 60)
-                
-                Spacer()
+                .edgesIgnoringSafeArea(.all)
+                .background(colorScheme == .light ? Color.bgLight : Color.bgDark)
             }
-            .ignoresSafeArea()
-            .background(colorScheme == .light ? Color.bgLight : Color.bgDark)
+//            .onRotate { newOrientation in
+//                switch newOrientation {
+//                case .portrait, .portraitUpsideDown:
+//                    isPortrait = true
+//                case .landscapeLeft, .landscapeRight:
+//                    isPortrait = false
+//                default:
+//                    break
+//                }
+//            }
         }
     }
 }

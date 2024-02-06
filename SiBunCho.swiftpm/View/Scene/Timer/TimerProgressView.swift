@@ -55,23 +55,22 @@ struct TimerProgressView: View {
                                 }
                             }
                         }
-//                        .animation(.easeInOut(duration: 0.08), value: isTimeOver)
                     }
                     .padding([.leading, .bottom, .trailing], 100)
                 }
                 
                 if remainingTime > 0 {
                     ProgressView(value: Double(max(remainingTime - 1, 0)) / Double(totalTime - 1))
-                        .progressViewStyle(CircularProgressViewStyle(size: 560, remainingTime: $remainingTime))
+                        .progressViewStyle(CircularProgressViewStyle(size: 570, remainingTime: $remainingTime))
                         .animation(.linear(duration: 1), value: remainingTime)
                     
                     if remainingTime <= 10 {
                         Text(second().sinoKoreanTime!)
-                            .padding(.top, 30)
+                            .padding(.top, 28)
                             .animatableSystemFont(weight: .bold, size: fontSize)
                     } else {
-                        HStack {
-                            Spacer()
+                        HStack(spacing: 0) {
+                            Spacer(minLength: 0)
                             VStack(alignment: .trailing, spacing: -12) {
                                 Text(hour().nativeKoreanTime! + "시간")
                                     .foregroundStyle(hour() > 0 ? .primary : .quinary)
@@ -82,8 +81,9 @@ struct TimerProgressView: View {
                                 Text(second().sinoKoreanTime! + "초")
                                     .foregroundStyle(hour() > 0 ? .quaternary : minute() > 0 ? . tertiary : .primary)
                             }
+                            .padding(.top, 28)
                         }
-                        .frame(width: 384 + 8)
+                        .frame(width: 384)
                         .aggro(.bold, size: 100)
                     }
                 } else {
@@ -192,7 +192,7 @@ struct TimerProgressView: View {
     }
     
     fileprivate func minute() -> Int {
-        remainingTime / 60
+        remainingTime / 60 - hour() * 60
     }
     
     fileprivate func second() -> Int {

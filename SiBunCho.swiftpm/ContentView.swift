@@ -95,7 +95,7 @@ struct ContentView: View {
                 }
             }
         }
-        .ignoresSafeArea()
+        .edgesIgnoringSafeArea(.all)
     }
 
     func setTimer() {

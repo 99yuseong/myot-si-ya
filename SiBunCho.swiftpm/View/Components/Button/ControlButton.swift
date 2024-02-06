@@ -32,16 +32,12 @@ struct ControlButton: View {
                 isToggled.toggle()
             }
         } label: {
-            ZStack {
-                
-                Circle()
-                    .frame(width: btnSize.width, height: btnSize.height)
-                    .foregroundStyle(bgColor)
-                
-                Image(systemName: (toggleIcon == nil || !isToggled) ? icon : toggleIcon!)
-                    .font(.system(size: iconSize, weight: .regular))
-                    .foregroundStyle(tintColor)
-            }
+            Image(systemName: (toggleIcon == nil || !isToggled) ? icon : toggleIcon!)
+                .font(.system(size: iconSize, weight: .regular))
+                .foregroundStyle(tintColor)
         }
+        .frame(width: btnSize.width, height: btnSize.height)
+        .background(bgColor)
+        .clipShape(Circle())
     }
 }
