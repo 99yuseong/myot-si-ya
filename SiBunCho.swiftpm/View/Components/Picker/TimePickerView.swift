@@ -26,14 +26,14 @@ enum PickerType {
     }
 }
 
-struct TimePickerView: UIViewRepresentable {
+struct TimePickerView<T>: UIViewRepresentable {
     
     @Binding var selectedItem: Int
     @State var section = 1000
     @State var lastSelectedRow = 0
     
-    let items: [Int]
-    let isNative: Bool
+    let items: [T]
+    let isLoop: Bool
     let type: PickerType
     
     func makeUIView(context: Context) -> UIPickerView {
@@ -69,17 +69,17 @@ struct TimePickerView: UIViewRepresentable {
         }
         
         func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-            return parent.items.count * 10000
+            if parent.isLoop {
+                return parent.items.count * 10000
+            }
+            
+            return parent.items.count
         }
         
         func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
             let actualRow = row % parent.items.count
             
-            if parent.isNative {
-                return "\(parent.items[actualRow].nativeKoreanTime!)"
-            }
-            
-            return "\(parent.items[actualRow].sinoKoreanTime!)"
+            return "\(parent.items[actualRow])"
         }
         
         func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -98,11 +98,7 @@ struct TimePickerView: UIViewRepresentable {
                 $0.alpha = 1
             }
                         
-            if parent.isNative {
-                label.text = "\(parent.items[actualRow].nativeKoreanTime!)"
-            } else {
-                label.text = "\(parent.items[actualRow].sinoKoreanTime!)"
-            }
+            label.text = "\(parent.items[actualRow])"
             label.textColor = .white
             label.textAlignment = .right
             label.font = UIFont(name: Aggro.bold.rawValue, size: parent.type.fontSize)

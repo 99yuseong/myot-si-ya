@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct TimerMainView: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     @State private var selectedHour = 0
     @State private var selectedMinute = 0
     @State private var selectedSecond = 1
@@ -118,18 +116,8 @@ struct TimerMainView: View {
                     }
                 }
                 .edgesIgnoringSafeArea(.all)
-                .background(colorScheme == .light ? Color.bgLight : Color.bgDark)
+                .background(Color.bg)
             }
-//            .onRotate { newOrientation in
-//                switch newOrientation {
-//                case .portrait, .portraitUpsideDown:
-//                    isPortrait = true
-//                case .landscapeLeft, .landscapeRight:
-//                    isPortrait = false
-//                default:
-//                    break
-//                }
-//            }
         }
     }
 }

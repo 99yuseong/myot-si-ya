@@ -17,6 +17,20 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    func toHours() -> Int {
+        let hour = Calendar.current.component(.hour, from: self)
+        
+        return hour > 12 ? hour - 12 : hour
+    }
+    
+    func toMinutes() -> Int {
+        return Calendar.current.component(.minute, from: self)
+    }
+    
+    func toSeconds() -> Int {
+        return Calendar.current.component(.second, from: self)
+    }
+    
     func toAmPm() -> String {
         let hour = Calendar.current.component(.hour, from: self)
         
@@ -49,5 +63,20 @@ extension Date {
         let second = Calendar.current.component(.second, from: self)
         
         return second.sinoKoreanTime ?? "알 수 없는 시간"
+    }
+    
+    func toKoreanPronunciation() -> String {
+        let hour = Calendar.current.component(.hour, from: self)
+        let minute = Calendar.current.component(.minute, from: self)
+        let second = Calendar.current.component(.second, from: self)
+        
+        var pron: String = ""
+        
+        pron += hour > 12 ? "ohu  " : "ojeon  "
+        pron += (hour > 12 ? hour - 12: hour).nativeTimePronunciation! + "-si  "
+        pron += minute.sinoTimePronunciation! + "-bun  "
+        pron += second.sinoTimePronunciation! + "-cho"
+        
+        return pron
     }
 }

@@ -21,7 +21,7 @@ struct HorizontalSlider: View {
             ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
                 
                 RoundedRectangle(cornerRadius: 12)
-                    .foregroundColor(.quaternaryDark)
+                    .foregroundColor(.quaternary)
                     .frame(width: gr.size.height, height: thumbSize)
                 
                 

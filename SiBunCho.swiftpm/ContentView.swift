@@ -10,7 +10,7 @@ import Combine
 
 struct ContentView: View {
     @State private var isTabBarVisible: Bool = false
-    @State private var selectedTab = 3
+    @State private var selectedTab = 2
     @State private var timerCancellable: AnyCancellable?
     
     var body: some View {
@@ -33,41 +33,33 @@ struct ContentView: View {
                     .tag(0)
                     .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
                 
-                Text("두 번째 탭")
-                    .tabItem {
-                        Image(systemName: Icon.global)
-                            .font(.system(size: 32, weight: .thin))
-                        Text("World Clock")
-                    }
-                    .tag(1)
-                    .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
-                
-                Text("세 번째 탭")
-                    .tabItem {
-                        Image(systemName: Icon.stopWatch)
-                            .font(.system(size: 32, weight: .thin))
-                        Text("StopWatch")
-                    }
-                    .tag(2)
-                    .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
-                
                 TimerMainView()
                     .tabItem {
                         Image(systemName: Icon.timer)
                             .font(.system(size: 32, weight: .thin))
                         Text("Timers")
                     }
-                    .tag(3)
+                    .tag(1)
                     .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
                 
-                Text("세 번째 탭")
+                AlarmMainView()
                     .tabItem {
                         Image(systemName: Icon.alarm)
                             .font(.system(size: 32, weight: .thin))
                         Text("Alarms")
                     }
-                    .tag(4)
+                    .tag(2)
                     .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
+                
+                Text("두 번째 탭")
+                    .tabItem {
+                        Image(systemName: Icon.global)
+                            .font(.system(size: 32, weight: .thin))
+                        Text("World Clock")
+                    }
+                    .tag(3)
+                    .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
+                
             }
             .aggro(.light, size: 16)
             .tint(.primary)

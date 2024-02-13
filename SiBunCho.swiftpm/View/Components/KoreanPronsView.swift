@@ -39,7 +39,7 @@ struct KoreanPronsListView: View {
             
             Rectangle()
                 .frame(width: 1, height: 12)
-                .background(Color.gray3Dark)
+                .background(Color.gray3)
                 .padding([.leading, .trailing], 8)
             
             HStack {
