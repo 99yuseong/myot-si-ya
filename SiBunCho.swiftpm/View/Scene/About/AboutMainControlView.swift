@@ -34,7 +34,6 @@ struct AboutMainControlView: View {
                 IconButton(Icon.brightness) {
                     if isUpdatingBrightness {
                         isUpdatingBrightness = false
-                        //                                    timerCancellable?.cancel()
                     } else {
                         isUpdatingBrightness = true
                         setTimer()
@@ -102,7 +101,6 @@ struct AboutMainControlView: View {
                         withAnimation {
                             if isUpdatingBrightness {
                                 isUpdatingBrightness = false
-                                //                                    timerCancellable?.cancel()
                             } else {
                                 isUpdatingBrightness = true
                                 setTimer()

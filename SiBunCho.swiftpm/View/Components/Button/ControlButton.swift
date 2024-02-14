@@ -14,7 +14,7 @@ struct ControlButton: View {
     let icon: String
     let toggleIcon: String?
     let tintColor: Color = .secondary
-    let bgColor: Color = .quaternaryDark
+    let bgColor: Color = .quaternary
     let iconSize: CGFloat = 32
     let btnSize: CGSize = CGSize(width: 60, height: 60)
     let action: () -> Void

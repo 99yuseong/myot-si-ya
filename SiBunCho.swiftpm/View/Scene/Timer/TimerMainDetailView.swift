@@ -35,12 +35,9 @@ struct TimerMainDetailView: View {
                 IconButton(text: "Aa") {
                     isPresentingSheet = true
                 }
-                .sheet(isPresented: $isPresentingSheet) {
-                    TimerMainInfoSheet(
-                        selectedHour: $selectedHour,
-                        selectedMinute: $selectedMinute,
-                        selectedSecond: $selectedSecond
-                    )
+                .fullScreenCover(isPresented: $isPresentingSheet) {
+                    TimerMainInfoSheet()
+                        .clearBg()
                 }
                 
                 IconButton(

@@ -3,8 +3,6 @@ import UIKit
 import Combine
 
 struct AboutMainView: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     @State private var currentTime = Date()
     @State private var isMuted: Bool = true
     @State private var isTimerRunning: Bool = false
@@ -110,7 +108,7 @@ struct AboutMainView: View {
             }
         }
         .edgesIgnoringSafeArea(.all)
-        .background(colorScheme == .light ? Color.bgLight : Color.bgDark)
+        .background(Color.bg)
         .onRotate { newOrientation in
             switch newOrientation {
             case .portrait, .portraitUpsideDown:

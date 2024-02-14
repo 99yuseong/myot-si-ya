@@ -8,11 +8,13 @@
 import SwiftUI
 
 extension Color {
-    static let bgDark = Color(hex: "#121212")
-    static let bgLight = Color(hex: "#FFFFFF")
-    static let gray3Light = Color(hex: "#48484A")
-    static let gray3Dark = Color(hex: "#48484A")
-    static let quaternaryDark = Color(hex: "#EBEBF5").opacity(0.16)
+    static let bg = Color("bg")
+    static let gray1 = Color("gray1")
+    static let gray2 = Color("gray2")
+    static let gray3 = Color("gray3")
+    static let gray4 = Color("gray4")
+    static let gray5 = Color("gray5")
+    static let quaternary = Color("quaternary")
 }
 
 extension Color {

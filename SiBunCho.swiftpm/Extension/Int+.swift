@@ -90,18 +90,54 @@ extension Int {
         }
     }
     
+    var nativeTimePronunciation: String? {
+        switch self {
+        case 0: return "young"
+        case 1: return "han"
+        case 2: return "du"
+        case 3: return "se"
+        case 4: return "ne"
+        case 5, 6, 7, 8, 9, 10: return self.nativePronunciation
+        case 11: return "yeol-han"
+        case 12: return "yeol-du"
+        default:
+            System.shared.log("More than 12 is not supported")
+            return nil
+        }
+    }
+    
+    var sinoTimePronunciation: String? {
+        switch self {
+        case 0: return "young"
+        case 1, 2, 3, 4, 5, 6, 7, 8, 9, 10: return self.sinoPronunciation
+        default:
+            guard (11..<60) ~= self else { 
+                System.shared.log("More than 59 is not supported")
+                return nil
+            }
+            
+            let tens = self / 10
+            let ones = self % 10
+            
+            let tensKorean = (tens != 1 ? tens.sinoTimePronunciation! + "-ship" : "ship")
+            let onesKorean = (ones != 0 ? "-" + ones.sinoTimePronunciation! : "")
+            
+            return tensKorean + onesKorean
+        }
+    }
+    
     var nativePronunciation: String? {
         switch self {
-        case 1: return "HANA"
-        case 2: return "DUL"
-        case 3: return "SET"
-        case 4: return "NET"
-        case 5: return "DASEOT"
-        case 6: return "YEOSEOT"
-        case 7: return "ILGOP"
-        case 8: return "YEODEOL"
-        case 9: return "AHOP"
-        case 10: return "YEOL"
+        case 1: return "ha-na"
+        case 2: return "dul"
+        case 3: return "set"
+        case 4: return "net"
+        case 5: return "da-seot"
+        case 6: return "yeo-seot"
+        case 7: return "il-gop"
+        case 8: return "yeo-deol"
+        case 9: return "a-hop"
+        case 10: return "yeol"
         default:
             System.shared.log("More than 10 is not supported")
             return nil
@@ -110,18 +146,18 @@ extension Int {
     
     var sinoPronunciation: String? {
         switch self {
-        case 1: return "IL"
-        case 2: return "Ee"
-        case 3: return "SAM"
-        case 4: return "SA"
-        case 5: return "OH"
-        case 6: return "YUK"
-        case 7: return "CHIL"
-        case 8: return "PAL"
-        case 9: return "GU"
-        case 10: return "SHIP"
-        case 100: return "BAEK"
-        case 1000: return "CHEON"
+        case 1: return "il"
+        case 2: return "ee"
+        case 3: return "sam"
+        case 4: return "sa"
+        case 5: return "oh"
+        case 6: return "yuk"
+        case 7: return "chil"
+        case 8: return "pal"
+        case 9: return "gu"
+        case 10: return "ship"
+        case 100: return "baek"
+        case 1000: return "cheon"
         default:
             System.shared.log("This number is not supported")
             return nil

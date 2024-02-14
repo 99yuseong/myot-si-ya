@@ -1,22 +1,16 @@
 //
-//  TimerMainInfoSheet.swift
+//  AlarmMainInfoSheet.swift
 //
 //
-//  Created by 남유성 on 2/5/24.
+//  Created by 남유성 on 2/13/24.
 //
 
 import SwiftUI
 
-struct TimerMainInfoSheet: View {
-    
+struct AlarmMainInfoSheet: View {
     @Environment(\.dismiss) private var dismiss
     
     @State private var date: Date = Date()
-    
-    @State var selectedHour: Int = 11
-    @State var selectedMinute: Int = 59
-    @State var selectedSecond: Int = 59
-    
     @State private var offset: CGSize = .zero
     @State private var alpha: Double = 1.0
     
@@ -27,19 +21,9 @@ struct TimerMainInfoSheet: View {
     var body: some View {
         GeometryReader { gr in
             TabView {
-                TimerSheetFirstPage()
-                TimerSheetSecondPage(
-                    selectedHour: $selectedHour,
-                    selectedMinute: $selectedMinute,
-                    selectedSecond: $selectedSecond,
-                    speechService: speechService
-                )
-                TimerSheetThirdPage(
-                    selectedHour: $selectedHour,
-                    selectedMinute: $selectedMinute,
-                    selectedSecond: $selectedSecond,
-                    speechService: speechService
-                )
+                AlarmSheetFirstPage(speechService)
+                AlarmSheetSecondPage(speechService: speechService)
+                AlarmSheetThirdPage()
             }
             .tabViewStyle(.page)
             .offset(offset)

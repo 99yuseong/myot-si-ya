@@ -14,19 +14,22 @@ struct KoreanPronsListView: View {
     private let prons: String
     private let detail2: String?
     private let prons2: String?
+    private let pronsWidth: CGFloat
     
     init(
         _ text: String,
         _ detail: String,
         _ prons: String,
         _ detail2: String? = nil,
-        _ prons2: String? = nil
+        _ prons2: String? = nil,
+        pronsWidth: CGFloat = 140
     ) {
         self.text = text
         self.detail = detail
         self.prons = prons
         self.detail2 = detail2
         self.prons2 = prons2
+        self.pronsWidth = pronsWidth
     }
     
     var body: some View {
@@ -39,14 +42,14 @@ struct KoreanPronsListView: View {
             
             Rectangle()
                 .frame(width: 1, height: 12)
-                .background(Color.gray3Dark)
+                .background(Color.gray3)
                 .padding([.leading, .trailing], 8)
             
             HStack {
                 KoreanPronsView(text: detail, prons: prons)
                 Spacer()
             }
-            .frame(width: 140)
+            .frame(width: pronsWidth)
             
             if detail2 != nil && prons2 != nil {
                 Text("/")

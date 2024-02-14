@@ -15,6 +15,10 @@ extension View {
     func animatableSystemFont(weight: Aggro, size: Double) -> some View {
         self.modifier(AnimatableAggroFontModifier(weight: weight, size: size))
     }
+    
+    func clearBg() -> some View {
+        self.modifier(ClearBackgroundViewModifier())
+    }
 }
 
 struct DeviceRotationViewModifier: ViewModifier {
@@ -41,5 +45,18 @@ struct AnimatableAggroFontModifier: ViewModifier, Animatable {
     func body(content: Content) -> some View {
         content
             .aggro(weight, size: size)
+    }
+}
+
+struct ClearBackgroundViewModifier: ViewModifier {
+    
+    func body(content: Content) -> some View {
+        if #available(iOS 16.4, *) {
+            content
+                .presentationBackground(.clear)
+        } else {
+            content
+                .background(ClearBgView())
+        }
     }
 }

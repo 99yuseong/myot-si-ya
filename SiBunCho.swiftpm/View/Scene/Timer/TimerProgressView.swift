@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 
 struct TimerProgressView: View {
-    @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
     
     @State private var timerCancellable: Cancellable? = nil
@@ -110,7 +109,7 @@ struct TimerProgressView: View {
             }
         }
         .ignoresSafeArea()
-        .background(colorScheme == .light ? Color.bgLight : Color.bgDark)
+        .background(Color.bg)
         .toolbar(.hidden, for: .navigationBar)
         .onAppear {
             if !isTimerRunning {

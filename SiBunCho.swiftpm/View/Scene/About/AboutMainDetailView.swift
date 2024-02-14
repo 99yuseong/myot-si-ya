@@ -64,8 +64,9 @@ struct AboutMainDetailView: View {
                 IconButton(text: "Aa") {
                     isPresentingSheet = true
                 }
-                .sheet(isPresented: $isPresentingSheet) {
+                .fullScreenCover(isPresented: $isPresentingSheet) {
                     AboutMainInfoSheet()
+                        .clearBg()
                 }
             }
             .foregroundStyle(.primary)
