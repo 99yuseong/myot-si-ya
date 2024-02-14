@@ -9,89 +9,68 @@ import SwiftUI
 
 struct TimerMainInfoSheet: View {
     
-    @Binding var selectedHour: Int
-    @Binding var selectedMinute: Int
-    @Binding var selectedSecond: Int
+    @Environment(\.dismiss) private var dismiss
+    
+    @State private var date: Date = Date()
+    
+    @State var selectedHour: Int = 11
+    @State var selectedMinute: Int = 59
+    @State var selectedSecond: Int = 59
+    
+    @State private var offset: CGSize = .zero
+    @State private var alpha: Double = 1.0
     
     private let speechService = SpeechService()
-    private let date = Date()
+    private let dThreshold: Double = 200
+    private let vThreshold: Double = 200
     
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 16) {
-                HStack(spacing: 0) {
-                    Text("\(selectedHour)")
-                    Text("h ")
-                        .foregroundStyle(.secondary)
-                    Text("\(selectedMinute)")
-                    Text("m ")
-                        .foregroundStyle(.secondary)
-                    Text("\(selectedSecond)")
-                    Text("s")
-                        .foregroundStyle(.secondary)
-                }
-                
-                HStack(spacing: 0) {
-                    Text("\(selectedHour)")
-                    Text("시간 ")
-                        .foregroundStyle(.secondary)
-                    Text("\(selectedMinute)")
-                    Text("분 ")
-                        .foregroundStyle(.secondary)
-                    Text("\(selectedSecond)")
-                    Text("초")
-                        .foregroundStyle(.secondary)
-                }
+        GeometryReader { gr in
+            TabView {
+                TimerSheetFirstPage()
+                TimerSheetSecondPage(
+                    selectedHour: $selectedHour,
+                    selectedMinute: $selectedMinute,
+                    selectedSecond: $selectedSecond,
+                    speechService: speechService
+                )
+                TimerSheetThirdPage(
+                    selectedHour: $selectedHour,
+                    selectedMinute: $selectedMinute,
+                    selectedSecond: $selectedSecond,
+                    speechService: speechService
+                )
             }
-            .aggro(.bold, size: 36)
-            Spacer()
-            IconButton(
-                Icon.sound,
-                contentSize: 40,
-                btnSize: CGSize(width: 80, height: 80)
-            ) {
-                speechService.speakInKorean(date.toKoreanTime())
-            }
-        }
-        .padding([.leading, .trailing], 60)
-        
-        Spacer()
-            .frame(height: 48)
-        
-        VStack(alignment: .leading) {
-            HStack(spacing: 92 - 16) {
-                Group {
-                    Text("Native KR")
-                    Text("Sino KR")
-                }
-                .aggro(.medium, size: 15)
-            }
-            .padding(.leading, 10 + 82 + 16 + 16)
-            
-            HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 16) {
-                    ForEach(1..<11) { num in
-                        KoreanPronsListView(
-                            "\(num)",
-                            num.nativeKorean ?? "",
-                            num.nativePronunciation ?? "",
-                            num.sinoKoreanTime,
-                            num.sinoPronunciation
-                        )
+            .tabViewStyle(.page)
+            .offset(offset)
+            .gesture(
+                DragGesture()
+                    .onChanged { v in
+                        let dy = v.location.y - v.startLocation.y
+                        let y = v.translation.height
+                        
+                        if dy > 0 {
+                            offset = CGSize(width: 0, height: y)
+                            alpha = dThreshold / (abs(y) * 2.0)
+                        }
                     }
-                }
-                .frame(width: 360)
-                    
-                Spacer()
-                
-                VStack(alignment: .leading, spacing: 16) {
-                    KoreanPronsListView("Hour", "시간", "SIGAN")
-                    KoreanPronsListView("Minute", "분", "BUN")
-                    KoreanPronsListView("Second", "초", "CHO")
-                }
-                .frame(width: 240)
-            }
-            .padding(.trailing, 60)
+                    .onEnded { v in
+                        let dy = v.location.y - v.startLocation.y
+                        let vy = v.velocity.height
+                        
+                        if dy > dThreshold || vy > vThreshold {
+                            dismiss()
+                        } else {
+                            withAnimation {
+                                offset = .zero
+                                alpha = 1.0
+                            }
+                        }
+                    }
+            )
+            .background(Color.bg)
+            .opacity(alpha)
+            .ignoresSafeArea()
         }
     }
 }
