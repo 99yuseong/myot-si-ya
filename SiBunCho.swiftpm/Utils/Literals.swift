@@ -20,6 +20,7 @@ enum Icon {
     static var plus = "plus"
     static var cancel = "xmark"
     static var pause = "pause"
+    static var upDown = "arrow.up.arrow.down"
     
     static var about = "info.circle"
     static var global = "globe"

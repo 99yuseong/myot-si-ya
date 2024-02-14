@@ -50,7 +50,11 @@ struct TimePickerView<T>: UIViewRepresentable {
     }
     
     func updateUIView(_ pickerView: UIPickerView, context: Context) {
-        pickerView.selectRow(selectedItem + section * items.count, inComponent: 0, animated: true)
+        if isLoop {
+            pickerView.selectRow(selectedItem + section * items.count, inComponent: 0, animated: true)
+        } else {
+            pickerView.selectRow(selectedItem, inComponent: 0, animated: true)
+        }
     }
     
     func makeCoordinator() -> Coordinator {

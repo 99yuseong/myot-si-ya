@@ -41,6 +41,41 @@ extension Date {
         "\(toKoreanAmPm()) \(toKoreanHours())시 \(toKoreanMinutes())분 \(toKoreanSeconds())초"
     }
     
+    func toKoreanTimeSection() -> String {
+        let hour = Calendar.current.component(.hour, from: self)
+        let minute = Calendar.current.component(.minute, from: self)
+        
+        if hour == 12 && minute == 0 {
+            return "정오"
+        }
+        
+        if hour == 24 && minute == 0 {
+            return "자정"
+        }
+        
+        if (0..<3) ~= hour {
+            return "밤"
+        }
+        
+        if (3..<6) ~= hour {
+            return "새벽"
+        }
+        
+        if (6..<12) ~= hour {
+            return "아침"
+        }
+        
+        if (12..<18) ~= hour {
+            return "낮"
+        }
+        
+        if (18..<21) ~= hour {
+            return "저녁"
+        }
+        
+        return "밤"
+    }
+    
     func toKoreanAmPm() -> String {
         let hour = Calendar.current.component(.hour, from: self)
         
@@ -65,18 +100,69 @@ extension Date {
         return second.sinoKoreanTime ?? "알 수 없는 시간"
     }
     
-    func toKoreanPronunciation() -> String {
+    func toKoreanPronunciation(
+        isM: Bool = true,
+        isS: Bool = true,
+        isTimeSection: Bool = false
+    ) -> String {
+        
         let hour = Calendar.current.component(.hour, from: self)
         let minute = Calendar.current.component(.minute, from: self)
         let second = Calendar.current.component(.second, from: self)
         
         var pron: String = ""
         
-        pron += hour > 12 ? "ohu  " : "ojeon  "
-        pron += (hour > 12 ? hour - 12: hour).nativeTimePronunciation! + "-si  "
-        pron += minute.sinoTimePronunciation! + "-bun  "
-        pron += second.sinoTimePronunciation! + "-cho"
+        if isTimeSection {
+            pron += self.toKoreanTimeSectionPronunciation()
+        } else {
+            pron += hour > 12 ? "ohu" : "ojeon"
+        }
+    
+        pron += "  " + (hour > 12 ? hour - 12: hour).nativeTimePronunciation! + "-si"
+        
+        if isM {
+            pron += "  " + minute.sinoTimePronunciation! + "-bun"
+        }
+        
+        if isM && isS {
+            pron += "  " + second.sinoTimePronunciation! + "-cho"
+        }
         
         return pron
+    }
+    
+    func toKoreanTimeSectionPronunciation() -> String {
+        let hour = Calendar.current.component(.hour, from: self)
+        let minute = Calendar.current.component(.minute, from: self)
+        
+        if hour == 12 && minute == 0 {
+            return "jeong-oh"
+        }
+        
+        if hour == 24 && minute == 0 {
+            return "ja-jeong"
+        }
+        
+        if (0..<3) ~= hour {
+            return "bam"
+        }
+        
+        if (3..<6) ~= hour {
+            return "sae-byeok"
+        }
+        
+        if (6..<12) ~= hour {
+            return "a-chim"
+        }
+        
+        if (12..<18) ~= hour {
+            return "nat"
+        }
+        
+        if (18..<21) ~= hour {
+            return "jeo-nyeok"
+        }
+        
+        return "bam"
     }
 }

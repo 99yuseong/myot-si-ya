@@ -21,6 +21,14 @@ struct AlarmMainView: View {
         NavigationStack {
             GeometryReader { gr in
                 VStack(spacing: 0) {
+                    IconButton(text: "Aa") {
+                        isPresentingSheet = true
+                    }
+                    .fullScreenCover(isPresented: $isPresentingSheet) {
+                        AlarmMainInfoSheet()
+                            .clearBg()
+                    }
+                    
                     HStack {
                         Text("\(selectedAmPm) \(selectedHour) \(selectedMinute)")
                         .padding([.top, .leading], 100)
