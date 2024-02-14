@@ -10,7 +10,7 @@ import Combine
 
 struct ContentView: View {
     @State private var isTabBarVisible: Bool = false
-    @State private var selectedTab = 2
+    @State private var selectedTab = 1
     @State private var timerCancellable: AnyCancellable?
     
     var body: some View {
@@ -33,33 +33,23 @@ struct ContentView: View {
                     .tag(0)
                     .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
                 
-                TimerMainView()
-                    .tabItem {
-                        Image(systemName: Icon.timer)
-                            .font(.system(size: 32, weight: .thin))
-                        Text("Timers")
-                    }
-                    .tag(1)
-                    .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
-                
                 AlarmMainView()
                     .tabItem {
                         Image(systemName: Icon.alarm)
                             .font(.system(size: 32, weight: .thin))
                         Text("Alarms")
                     }
+                    .tag(1)
+                    .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
+                
+                TimerMainView()
+                    .tabItem {
+                        Image(systemName: Icon.timer)
+                            .font(.system(size: 32, weight: .thin))
+                        Text("Timers")
+                    }
                     .tag(2)
                     .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
-                
-                Text("두 번째 탭")
-                    .tabItem {
-                        Image(systemName: Icon.global)
-                            .font(.system(size: 32, weight: .thin))
-                        Text("World Clock")
-                    }
-                    .tag(3)
-                    .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
-                
             }
             .aggro(.light, size: 16)
             .tint(.primary)
