@@ -15,6 +15,7 @@ struct AlarmMainDetailView: View {
     @Binding var isPresentingSheet: Bool
     @Binding var isSettingAlarm: Bool
     @Binding var isDeletingAlarm: Bool
+    @Binding var alarms: [Alarm]
     
     var body: some View {
         
@@ -26,11 +27,13 @@ struct AlarmMainDetailView: View {
                     .aggro(.light, size: 17)
             }
             
-            VStack(alignment: .leading, spacing: 4) {
-                Text("Alarm goes off in")
-                    .aggro(.light, size: 17)
-                Text("\(hour()):\(minute()) \(amPm())")
-                    .aggro(.medium, size: 20)
+            if isSettingAlarm {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Alarm will go off in")
+                        .aggro(.light, size: 17)
+                    Text("\(hour()):\(minute()) \(amPm())")
+                        .aggro(.medium, size: 20)
+                }
             }
             
             HStack(spacing: 16) {
@@ -38,6 +41,7 @@ struct AlarmMainDetailView: View {
                     IconButton(text: "Aa") {
                         isPresentingSheet = true
                     }
+                    .transition(.opacity)
                     .fullScreenCover(isPresented: $isPresentingSheet) {
                         AlarmMainInfoSheet()
                             .clearBg()
@@ -84,6 +88,7 @@ struct AlarmMainDetailView: View {
                             isDeletingAlarm.toggle()
                         }
                     }
+                    .disabled(alarms.isEmpty)
                 }
             }
             .foregroundStyle(.primary)

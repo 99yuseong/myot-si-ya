@@ -12,6 +12,7 @@ struct AlarmToggleView: View {
     @Binding var alarms: [Alarm]
     @ObservedObject var alarm: Alarm
     @Binding var isDeleting: Bool
+    @State private var isSheetPresented: Bool = false
 
     var body: some View {
         VStack(alignment: .trailing, spacing: 0) {
@@ -31,12 +32,13 @@ struct AlarmToggleView: View {
             Spacer()
                 .frame(height: 24)
             
-            if isDeleting {
+            if isDeleting || isSheetPresented {
                 HStack {
                     Spacer()
                     Button {
                         withAnimation {
                             alarms.removeAll() { $0.id == alarm.id }
+                            alarms.sort(by: <)
                             if alarms.isEmpty {
                                 isDeleting = false
                             }
@@ -52,16 +54,35 @@ struct AlarmToggleView: View {
                 }
             } else {
                 Toggle(isOn: $alarm.isOn) {}
-                .toggleStyle(SwitchToggleStyle(tint: Color.green))
+                    .toggleStyle(SwitchToggleStyle(tint: Color.green))
+                    .onTapGesture {
+                        isSheetPresented = false
+                    }
             }
         }
         .aggro(.bold, size: 32)
         .frame(width: 132)
         .padding(24)
+        .background(Color.bg)
         .overlay(
             RoundedRectangle(cornerRadius: 16)
                 .stroke(.tertiary, lineWidth: 1)
-        )        
+        )
+        .onTapGesture {
+            withAnimation {
+                isSheetPresented.toggle()
+            }
+        }
+        .popover(isPresented: $isSheetPresented) {
+            MultiAlarmPickerView(
+                selectedAmPm: $alarm.timeSection,
+                selectedHour: $alarm.hour,
+                selectedMinute: $alarm.minute,
+                type: .small
+            )
+            .padding()
+            .background(Color.bg)
+        }
     }
 }
 
@@ -71,7 +92,11 @@ extension AlarmToggleView {
     }
     
     func koreanHour() -> String {
-        alarm.hour.nativeKoreanTime!
+        if alarm.hour == 0 {
+            return "열두"
+        }
+        
+        return alarm.hour.nativeKoreanTime!
     }
     
     func koreanMinute() -> String {
@@ -83,7 +108,11 @@ extension AlarmToggleView {
     }
     
     func hour() -> String {
-        "\(alarm.hour)"
+        if alarm.hour == 0 {
+            return "12"
+        }
+        
+        return "\(alarm.hour)"
     }
     
     func minute() -> String {

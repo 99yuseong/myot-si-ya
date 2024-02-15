@@ -30,7 +30,8 @@ struct AlarmMainView: View {
                             selectedMinute: $selectedMinute,
                             isPresentingSheet: $isPresentingSheet,
                             isSettingAlarm: $isSettingAlarm,
-                            isDeletingAlarm: $isDeletingAlarm
+                            isDeletingAlarm: $isDeletingAlarm,
+                            alarms: $alarms
                         )
                         .padding([.top, .leading], 100)
                         Spacer()
@@ -49,7 +50,6 @@ struct AlarmMainView: View {
                     } else {
                         ScrollView(.horizontal) {
                             LazyHStack(spacing: 28) {
-                                
                                 ForEach(alarms, id: \.self.id) { alarm in
                                     AlarmToggleView(
                                         alarms: $alarms,
@@ -71,7 +71,7 @@ struct AlarmMainView: View {
                             .padding([.leading, .trailing], 100)
                         }
                         .scrollIndicators(.hidden)
-                        .transition(.slide)
+                        .transition(.slide)   
                     }
                 }
                 .edgesIgnoringSafeArea(.all)

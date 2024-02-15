@@ -38,6 +38,7 @@ struct AlarmMainPickerView: View {
                                 minute: selectedMinute,
                                 isOn: true)
                             )
+                            alarms.sort(by: <)
                             isSettingAlarm.toggle()
                         }
                     }
@@ -61,6 +62,7 @@ struct AlarmMainPickerView: View {
                                 minute: selectedMinute,
                                 isOn: true)
                             )
+                            alarms.sort(by: <)
                             isSettingAlarm.toggle()
                         }
                     }
@@ -88,6 +90,7 @@ struct AlarmMainPickerView: View {
                                 minute: selectedMinute,
                                 isOn: true)
                             )
+                            alarms.sort(by: <)
                             isSettingAlarm.toggle()
                         }
                     }

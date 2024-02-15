@@ -74,11 +74,11 @@ struct AlarmSheetThirdPage: View {
                 Spacer()
                 
                 VStack(alignment: .leading, spacing: 16) {
-                    KoreanPronsListView("PM", "오후", "o-hu")
-                    KoreanPronsListView("Daytime", "낮", "nat")
-                    KoreanPronsListView("Evening", "저녁", "jeo-nyeok", pronsWidth: 160)
-                    KoreanPronsListView("Night", "밤", "bam")
-                    KoreanPronsListView("Midnight", "자정", "ja-jeong")
+                    KoreanPronsListView("PM", "오후", "o-hu", textWidth: 88)
+                    KoreanPronsListView("Daytime", "낮", "nat", textWidth: 88)
+                    KoreanPronsListView("Evening", "저녁", "jeo-nyeok", textWidth: 88, pronsWidth: 160)
+                    KoreanPronsListView("Night", "밤", "bam", textWidth: 88)
+                    KoreanPronsListView("Midnight", "자정", "ja-jeong", textWidth: 88)
                 }
             }
         }

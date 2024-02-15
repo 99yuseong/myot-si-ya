@@ -22,13 +22,13 @@ class Alarm: ObservableObject, Identifiable {
         self.isOn = isOn
     }
     
-//    static func == (lhs: Alarm, rhs: Alarm) -> Bool {
-//        return lhs.id == rhs.id
-//    }
+    static func <(lhs: Alarm, rhs: Alarm) -> Bool {
+        if lhs.timeSection == rhs.timeSection {
+            if lhs.hour == rhs.hour {
+                return lhs.minute < rhs.minute
+            }
+            return lhs.hour < rhs.hour
+        }
+        return lhs.timeSection < rhs.timeSection
+    }
 }
-//
-//extension Alarm: Hashable {
-//    static func == (lhs: Alarm, rhs: Alarm) -> Bool {
-//        return lhs.id == rhs.id
-//    }
-//}

@@ -77,5 +77,6 @@ struct MultiAlarmPickerView: View {
             }
             .frame(height: type == .large ? 84 * 5 : 48 * 6)
         }
+        .background(Color.bg)
     }
 }
