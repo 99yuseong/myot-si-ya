@@ -53,11 +53,12 @@ struct IconButton: View {
             if let content = content {
                 Text(content)
                     .font(.system(size: contentSize, weight: .thin))
+                    .frame(width: btnSize.width, height: btnSize.height)
             } else {
                 Image(systemName: nameForToggle == nil ? name : isToggled ? nameForToggle! : name)
                     .font(.system(size: contentSize, weight: .thin))
+                    .frame(width: btnSize.width, height: btnSize.height)
             }
         }
-        .frame(width: btnSize.width, height: btnSize.height)
     }
 }

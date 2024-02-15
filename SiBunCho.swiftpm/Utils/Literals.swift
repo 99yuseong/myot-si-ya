@@ -21,6 +21,8 @@ enum Icon {
     static var cancel = "xmark"
     static var pause = "pause"
     static var upDown = "arrow.up.arrow.down"
+    static var list = "list.bullet"
+    static var setting = "gearshape"
     
     static var about = "info.circle"
     static var global = "globe"

@@ -14,6 +14,7 @@ struct KoreanPronsListView: View {
     private let prons: String
     private let detail2: String?
     private let prons2: String?
+    private let textWidth: CGFloat
     private let pronsWidth: CGFloat
     
     init(
@@ -22,6 +23,7 @@ struct KoreanPronsListView: View {
         _ prons: String,
         _ detail2: String? = nil,
         _ prons2: String? = nil,
+        textWidth: CGFloat = 82,
         pronsWidth: CGFloat = 140
     ) {
         self.text = text
@@ -29,6 +31,7 @@ struct KoreanPronsListView: View {
         self.prons = prons
         self.detail2 = detail2
         self.prons2 = prons2
+        self.textWidth = textWidth
         self.pronsWidth = pronsWidth
     }
     
@@ -38,7 +41,7 @@ struct KoreanPronsListView: View {
                 Spacer()
                 Text(text)
             }
-            .frame(width: 82)
+            .frame(width: textWidth)
             
             Rectangle()
                 .frame(width: 1, height: 12)
