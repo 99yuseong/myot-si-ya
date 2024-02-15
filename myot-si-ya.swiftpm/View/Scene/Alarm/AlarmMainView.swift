@@ -47,6 +47,7 @@ struct AlarmMainView: View {
                             gr: gr
                         )
                         .transition(.backslide)
+                        
                     } else {
                         ScrollView(.horizontal) {
                             LazyHStack(spacing: 28) {
@@ -71,7 +72,7 @@ struct AlarmMainView: View {
                             .padding([.leading, .trailing], 100)
                         }
                         .scrollIndicators(.hidden)
-                        .transition(.slide)   
+                        .transition(.slide)
                     }
                 }
                 .edgesIgnoringSafeArea(.all)

@@ -10,7 +10,6 @@ import SwiftUI
 struct AboutMainClockView: View {
     
     @Binding var currentTime: Date
-    @Binding var isTimerRunning: Bool
     @Binding var brightness: Double
     @Binding var isMuted: Bool
     
@@ -19,15 +18,15 @@ struct AboutMainClockView: View {
     let player: AudioService
     
     var body: some View {
-        VStack(alignment: .trailing, spacing: -18) {
+        VStack(alignment: .trailing, spacing: -24) {
             Text("\(currentTime.toKoreanAmPm())")
             HStack(spacing: 0) {
-                VStack(alignment: .trailing, spacing: -18) {
+                VStack(alignment: .trailing, spacing: -24) {
                     Text(hour())
                     Text(minute())
                     Text(second())
                 }
-                VStack(alignment: .trailing, spacing: -18) {
+                VStack(alignment: .trailing, spacing: -24) {
                     Text("시")
                     Text("분")
                     Text("초")
@@ -37,10 +36,8 @@ struct AboutMainClockView: View {
             }
             .onReceive(timer) {
                 currentTime = $0
-                if !isTimerRunning {
-                    player.playAudio(fileName: "clock1")
-                    isMuted ? player.mute() : player.unmute()
-                    isTimerRunning.toggle()
+                if !isMuted {
+                    player.playAudio(fileName: "clock",playCount: 1)
                 }
             }
         }

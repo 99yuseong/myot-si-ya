@@ -1,6 +1,6 @@
 //
 //  Alarm.swift
-//  SiBunCho
+//  
 //
 //  Created by 남유성 on 2/15/24.
 //

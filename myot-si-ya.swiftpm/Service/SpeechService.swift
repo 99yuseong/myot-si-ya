@@ -15,7 +15,7 @@ class SpeechService {
         let speechUtterance = AVSpeechUtterance(string: text)
         speechUtterance.voice = AVSpeechSynthesisVoice(language: "ko-KR")
         speechUtterance.volume = 1.0
-        speechUtterance.rate = 0.2
+        speechUtterance.rate = 0.4
                     
         synthesizer.speak(speechUtterance)
     }

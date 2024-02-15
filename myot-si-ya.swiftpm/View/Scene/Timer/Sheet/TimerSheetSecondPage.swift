@@ -197,7 +197,7 @@ struct TimerSheetSecondPage: View {
                     contentSize: 40,
                     btnSize: CGSize(width: 80, height: 80)
                 ) {
-                    speechService.speakInKorean(koreanTime() + " 후")
+                    speechService.speakInKorean(koreanTime() + " 전")
                 }
             }
         }

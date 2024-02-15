@@ -8,15 +8,15 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "SiBunCho",
+    name: "myot-si-ya",
     platforms: [
         .iOS("16.0")
     ],
     products: [
         .iOSApplication(
-            name: "SiBunCho",
+            name: "myot-si-ya",
             targets: ["AppModule"],
-            bundleIdentifier: "com.yuseong.com.TokTakTokTak",
+            bundleIdentifier: "com.yuseong.com.myot-si-ya",
             teamIdentifier: "Q6CK9777WL",
             displayVersion: "1.0",
             bundleVersion: "1",

@@ -4,8 +4,7 @@ import Combine
 
 struct AboutMainView: View {
     @State private var currentTime = Date()
-    @State private var isMuted: Bool = true
-    @State private var isTimerRunning: Bool = false
+    @State private var isMuted: Bool = false
     @State private var isPresentingSheet: Bool = false
     @State private var isScreenMode: Bool = false
     @State private var isUpdatingBrightness: Bool = false
@@ -16,7 +15,6 @@ struct AboutMainView: View {
 
     private let player = AudioService()
     
-
     var body: some View {
         ZStack {
             GeometryReader { gr in
@@ -54,7 +52,6 @@ struct AboutMainView: View {
                             Spacer()
                             AboutMainClockView(
                                 currentTime: $currentTime,
-                                isTimerRunning: $isTimerRunning,
                                 brightness: $brightness,
                                 isMuted: $isMuted,
                                 player: player
@@ -96,7 +93,6 @@ struct AboutMainView: View {
                             Spacer()
                             AboutMainClockView(
                                 currentTime: $currentTime,
-                                isTimerRunning: $isTimerRunning,
                                 brightness: $brightness,
                                 isMuted: $isMuted,
                                 player: player
@@ -109,6 +105,12 @@ struct AboutMainView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .background(Color.bg)
+        .onAppear {
+            isMuted = false
+        }
+        .onDisappear {
+            isMuted = true
+        }
         .onRotate { newOrientation in
             switch newOrientation {
             case .portrait, .portraitUpsideDown:

@@ -21,7 +21,7 @@ class AudioService {
         do {
             player = try AVAudioPlayer(contentsOf: url)
             player?.numberOfLoops = playCount == -1 ? -1 : playCount - 1
-            player?.volume = 0.2
+            player?.volume = 0.1
             player?.prepareToPlay()
             player?.play()
         } catch {
@@ -41,6 +41,6 @@ class AudioService {
     
     func unmute() {
         isMuted = false
-        player?.volume = 0.2
+        player?.volume = 0.1
     }
 }

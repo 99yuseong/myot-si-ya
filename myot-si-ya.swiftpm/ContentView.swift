@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  SiBunCho
+//  
 //
 //  Created by 남유성 on 2/4/24.
 //
@@ -10,7 +10,7 @@ import Combine
 
 struct ContentView: View {
     @State private var isTabBarVisible: Bool = false
-    @State private var selectedTab = 1
+    @State private var selectedTab = 0
     @State private var timerCancellable: AnyCancellable?
     
     var body: some View {
@@ -52,8 +52,14 @@ struct ContentView: View {
                     .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
             }
             .aggro(.light, size: 16)
-            .tint(.primary)
-            
+            .onAppear() {
+                let appearance = UITabBar.appearance()
+
+                appearance.backgroundImage = UIImage()
+                appearance.shadowImage = UIImage()
+                appearance.clipsToBounds = true
+            }
+
             if !isTabBarVisible {
                 VStack {
                     Spacer()
