@@ -9,12 +9,10 @@ import SwiftUI
 
 struct AlarmToggleView: View {
     
-    @State var setAmPm: Int
-    @State var setHour: Int
-    @State var setMinute: Int
-    @State var isOn: Bool
+    @Binding var alarms: [Alarm]
+    @ObservedObject var alarm: Alarm
     @Binding var isDeleting: Bool
-    
+
     var body: some View {
         VStack(alignment: .trailing, spacing: 0) {
             VStack(alignment: .trailing, spacing: -6) {
@@ -37,7 +35,12 @@ struct AlarmToggleView: View {
                 HStack {
                     Spacer()
                     Button {
-                         
+                        withAnimation {
+                            alarms.removeAll() { $0.id == alarm.id }
+                            if alarms.isEmpty {
+                                isDeleting = false
+                            }
+                        }
                     } label: {
                         Image(systemName: Icon.cancel)
                             .font(.system(size: 18, weight: .bold))
@@ -46,13 +49,9 @@ struct AlarmToggleView: View {
                     }
                     .background(.red)
                     .clipShape(Circle())
-//                    .transition(.opacity)
-//                    .animation(.easeInOut, value: isDeleting)
                 }
             } else {
-                Toggle(isOn: $isOn) {
-                    
-                }
+                Toggle(isOn: $alarm.isOn) {}
                 .toggleStyle(SwitchToggleStyle(tint: Color.green))
             }
         }
@@ -68,31 +67,26 @@ struct AlarmToggleView: View {
 
 extension AlarmToggleView {
     func koreanAmPm() -> String {
-        setAmPm == 0 ? "오전" : "오후"
+        alarm.timeSection == 0 ? "오전" : "오후"
     }
     
     func koreanHour() -> String {
-        setHour.nativeKoreanTime!
+        alarm.hour.nativeKoreanTime!
     }
     
     func koreanMinute() -> String {
-        setMinute.sinoKoreanTime!
+        alarm.minute.sinoKoreanTime!
     }
     
     func amPm() -> String {
-        setAmPm == 0 ? "AM" : "PM"
+        alarm.timeSection == 0 ? "AM" : "PM"
     }
     
     func hour() -> String {
-        "\(setHour)"
+        "\(alarm.hour)"
     }
     
     func minute() -> String {
-        setMinute < 10 ? "0\(setMinute)" : "\(setMinute)"
+        alarm.minute < 10 ? "0\(alarm.minute)" : "\(alarm.minute)"
     }
-}
-
-#Preview {
-    @State var isDeleting = true
-    return AlarmToggleView(setAmPm: 1, setHour: 12, setMinute: 24, isOn: true, isDeleting: $isDeleting)
 }

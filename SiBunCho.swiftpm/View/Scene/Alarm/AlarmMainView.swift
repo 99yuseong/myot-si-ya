@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AlarmMainView: View {
+        
     @State private var selectedAmPm: Int = 0
     @State private var selectedHour = 0
     @State private var selectedMinute = 0
@@ -16,7 +17,7 @@ struct AlarmMainView: View {
     @State private var isSettingAlarm = false
     @State private var isDeletingAlarm = false
     
-    @State private var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    @State private var alarms: [Alarm] = []
         
     var body: some View {
         NavigationStack {
@@ -41,18 +42,18 @@ struct AlarmMainView: View {
                             selectedHour: $selectedHour,
                             selectedMinute: $selectedMinute,
                             isSettingAlarm: $isSettingAlarm,
+                            alarms: $alarms,
                             gr: gr
                         )
                         .transition(.backslide)
                     } else {
                         ScrollView(.horizontal) {
                             LazyHStack(spacing: 28) {
-                                ForEach(0..<2) {
+                                
+                                ForEach(alarms, id: \.self.id) { alarm in
                                     AlarmToggleView(
-                                        setAmPm: 1,
-                                        setHour: $0,
-                                        setMinute: $0,
-                                        isOn: true,
+                                        alarms: $alarms,
+                                        alarm: alarm,
                                         isDeleting: $isDeletingAlarm
                                     )
                                 }
