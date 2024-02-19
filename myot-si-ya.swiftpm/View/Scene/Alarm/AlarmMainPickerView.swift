@@ -14,7 +14,7 @@ struct AlarmMainPickerView: View {
     @Binding var selectedMinute: Int
     
     @Binding var isSettingAlarm: Bool
-    @Binding var alarms: [Alarm]
+    @Binding var alarms: Alarms
     
     let gr: GeometryProxy
     
@@ -33,7 +33,7 @@ struct AlarmMainPickerView: View {
                     ControlButton(icon: Icon.plus) {
                         withAnimation {
                             addAlarm()
-                            alarms.sort(by: <)
+                            alarms.data.sort(by: <)
                             isSettingAlarm.toggle()
                         }
                     }
@@ -52,7 +52,7 @@ struct AlarmMainPickerView: View {
                     ControlButton(icon: Icon.plus) {
                         withAnimation {
                             addAlarm()
-                            alarms.sort(by: <)
+                            alarms.data.sort(by: <)
                             isSettingAlarm.toggle()
                         }
                     }
@@ -75,7 +75,7 @@ struct AlarmMainPickerView: View {
                     ControlButton(icon: Icon.plus) {
                         withAnimation {
                             addAlarm()
-                            alarms.sort(by: <)
+                            alarms.data.sort(by: <)
                             isSettingAlarm.toggle()
                         }
                     }
@@ -87,13 +87,13 @@ struct AlarmMainPickerView: View {
     }
     
     func addAlarm() {
-        let alarm = AlarmModel(
+        let alarm = Alarm(
             timeSection: selectedAmPm,
             hour: selectedHour,
             minute: selectedMinute,
             isOn: true)
         
         UserDefaults.addAlarm(alarm)
-        alarms.append(alarm.toAlarm())
+        alarms.data.append(alarm)
     }
 }

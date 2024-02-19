@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AlarmToggleView: View {
     
-    @Binding var alarms: [Alarm]
+    @Binding var alarms: Alarms
     @ObservedObject var alarm: Alarm
     @Binding var isDeleting: Bool
     @State private var isSheetPresented: Bool = false
@@ -38,8 +38,8 @@ struct AlarmToggleView: View {
                     Button {
                         withAnimation {
                             removeAlarm()
-                            alarms.sort(by: <)
-                            if alarms.isEmpty {
+                            alarms.data.sort(by: <)
+                            if alarms.data.isEmpty {
                                 isDeleting = false
                             }
                         }
@@ -59,6 +59,7 @@ struct AlarmToggleView: View {
                         isSheetPresented = false
                     }
                     .onReceive(alarm.$isOn) { isOn in
+                        updateAlarm()
                         NotificationService.shared.scheduleAlarm(alarm, isOn)
                     }
             }
@@ -124,6 +125,10 @@ extension AlarmToggleView {
     
     func removeAlarm() {
         UserDefaults.removeAlarm(alarm.id)
-        alarms.removeAll() { $0.id == alarm.id }
+        alarms.data.removeAll() { $0.id == alarm.id }
+    }
+    
+    func updateAlarm() {
+        UserDefaults.updateAlarm(alarm.id, isOn: alarm.isOn)
     }
 }

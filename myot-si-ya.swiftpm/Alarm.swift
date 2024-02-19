@@ -15,7 +15,35 @@ struct AlarmModel: Codable {
     var id = UUID()
     
     func toAlarm() -> Alarm {
-        Alarm(timeSection: timeSection, hour: hour, minute: minute, isOn: isOn, id: id)
+        Alarm(self)
+    }
+    
+    mutating func toggle() {
+        isOn.toggle()
+    }
+    
+    init(_ alarm: Alarm) {
+        self.timeSection = alarm.timeSection
+        self.hour = alarm.hour
+        self.minute = alarm.minute
+        self.isOn = alarm.isOn
+        self.id = alarm.id
+    }
+}
+
+struct AlarmsModel: Codable {
+    var data: [AlarmModel]
+    
+    func toAlarms() -> Alarms {
+        Alarms(data: data.map { $0.toAlarm() })
+    }
+}
+
+class Alarms: ObservableObject {
+    @Published var data: [Alarm]
+    
+    init(data: [Alarm]) {
+        self.data = data
     }
 }
 
@@ -27,12 +55,20 @@ class Alarm: ObservableObject, Identifiable {
     
     let id: UUID
     
-    init(timeSection: Int, hour: Int, minute: Int, isOn: Bool, id: UUID) {
+    init(timeSection: Int, hour: Int, minute: Int, isOn: Bool) {
         self.timeSection = timeSection
         self.hour = hour
         self.minute = minute
         self.isOn = isOn
-        self.id = id
+        self.id = UUID()
+    }
+    
+    init(_ alarmModel: AlarmModel) {
+        self.timeSection = alarmModel.timeSection
+        self.hour = alarmModel.hour
+        self.minute = alarmModel.minute
+        self.isOn = alarmModel.isOn
+        self.id = alarmModel.id
     }
     
     static func <(lhs: Alarm, rhs: Alarm) -> Bool {

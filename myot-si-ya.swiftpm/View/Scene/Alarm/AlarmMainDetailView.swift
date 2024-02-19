@@ -15,7 +15,7 @@ struct AlarmMainDetailView: View {
     @Binding var isPresentingSheet: Bool
     @Binding var isSettingAlarm: Bool
     @Binding var isDeletingAlarm: Bool
-    @Binding var alarms: [Alarm]
+    @Binding var alarms: Alarms
     
     var body: some View {
         
@@ -88,7 +88,7 @@ struct AlarmMainDetailView: View {
                             isDeletingAlarm.toggle()
                         }
                     }
-                    .disabled(alarms.isEmpty)
+                    .disabled(alarms.data.isEmpty)
                 }
             }
             .foregroundStyle(.primary)

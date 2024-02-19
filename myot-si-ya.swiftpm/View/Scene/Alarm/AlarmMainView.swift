@@ -17,7 +17,7 @@ struct AlarmMainView: View {
     @State private var isSettingAlarm = false
     @State private var isDeletingAlarm = false
     
-    @State private var alarms: [Alarm] = []
+    @Binding var alarms: Alarms
         
     var body: some View {
         NavigationStack {
@@ -51,10 +51,10 @@ struct AlarmMainView: View {
                     } else {
                         ScrollView(.horizontal) {
                             LazyHStack(spacing: 28) {
-                                ForEach(alarms, id: \.self.id) { alarm in
+                                ForEach(alarms.data.indices, id: \.self) { index in
                                     AlarmToggleView(
                                         alarms: $alarms,
-                                        alarm: alarm,
+                                        alarm: alarms.data[index],
                                         isDeleting: $isDeletingAlarm
                                     )
                                 }
@@ -84,7 +84,7 @@ struct AlarmMainView: View {
         }
     }
 }
-
-#Preview {
-    AlarmMainView()
-}
+//
+//#Preview {
+//    AlarmMainView()
+//}
