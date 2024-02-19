@@ -12,7 +12,6 @@ struct ContentView: View {
     @State private var isTabBarVisible: Bool = false
     @State private var selectedTab = 0
     @State private var timerCancellable: AnyCancellable?
-    @State private var alarms: Alarms = Alarms(data: [])
     
     var body: some View {
         let binding = Binding<Int>(
@@ -34,7 +33,7 @@ struct ContentView: View {
                     .tag(0)
                     .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
                 
-                AlarmMainView(alarms: $alarms)
+                AlarmMainView()
                     .tabItem {
                         Image(systemName: Icon.alarm)
                             .font(.system(size: 32, weight: .thin))

@@ -14,7 +14,7 @@ struct AlarmMainPickerView: View {
     @Binding var selectedMinute: Int
     
     @Binding var isSettingAlarm: Bool
-    @Binding var alarms: Alarms
+    @ObservedObject var alarms: Alarms
     
     let gr: GeometryProxy
     

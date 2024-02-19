@@ -37,7 +37,7 @@ class NotificationService {
     private func requestPermission() -> Void {
         UNUserNotificationCenter
             .current()
-            .requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+            .requestAuthorization(options: [.alert, .sound, .criticalAlert]) { granted, error in
                 if granted == true && error == nil { }
             }
     }
@@ -48,7 +48,7 @@ class NotificationService {
                 let content = UNMutableNotificationContent()
                 content.title = "알람"
                 content.body = "\(alarm.hour):\(alarm.minute) \(alarm.timeSection == 0 ? "AM":"PM")"
-                content.sound = UNNotificationSound.default
+                content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "Timer.mp3"))
                 
                 var dateComponents = DateComponents()
                 dateComponents.calendar = Calendar.current
@@ -75,7 +75,7 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         willPresent notification: UNNotification,
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
-        completionHandler([.banner, .badge, .sound])
+        completionHandler([.banner, .sound])
     }
 }
 

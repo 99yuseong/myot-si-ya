@@ -45,6 +45,10 @@ class Alarms: ObservableObject {
     init(data: [Alarm]) {
         self.data = data
     }
+    
+    func update(to data: Alarms) {
+        self.data = data.data
+    }
 }
 
 class Alarm: ObservableObject, Identifiable {

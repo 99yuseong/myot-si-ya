@@ -17,7 +17,7 @@ struct AlarmMainView: View {
     @State private var isSettingAlarm = false
     @State private var isDeletingAlarm = false
     
-    @Binding var alarms: Alarms
+    @StateObject var alarms: Alarms = Alarms(data: [])
         
     var body: some View {
         NavigationStack {
@@ -31,7 +31,7 @@ struct AlarmMainView: View {
                             isPresentingSheet: $isPresentingSheet,
                             isSettingAlarm: $isSettingAlarm,
                             isDeletingAlarm: $isDeletingAlarm,
-                            alarms: $alarms
+                            alarms: alarms
                         )
                         .padding([.top, .leading], 100)
                         Spacer()
@@ -43,7 +43,7 @@ struct AlarmMainView: View {
                             selectedHour: $selectedHour,
                             selectedMinute: $selectedMinute,
                             isSettingAlarm: $isSettingAlarm,
-                            alarms: $alarms,
+                            alarms: alarms,
                             gr: gr
                         )
                         .transition(.backslide)
@@ -51,10 +51,10 @@ struct AlarmMainView: View {
                     } else {
                         ScrollView(.horizontal) {
                             LazyHStack(spacing: 28) {
-                                ForEach(alarms.data.indices, id: \.self) { index in
+                                ForEach(alarms.data, id: \.self.id) { alarm in
                                     AlarmToggleView(
-                                        alarms: $alarms,
-                                        alarm: alarms.data[index],
+                                        alarms: alarms,
+                                        alarm: alarm,
                                         isDeleting: $isDeletingAlarm
                                     )
                                 }
@@ -80,11 +80,8 @@ struct AlarmMainView: View {
             }
         }
         .onAppear {
-            alarms = UserDefaults.getAlarmsData()
+            alarms.update(to: UserDefaults.getAlarmsData())
         }
     }
 }
-//
-//#Preview {
-//    AlarmMainView()
-//}
+

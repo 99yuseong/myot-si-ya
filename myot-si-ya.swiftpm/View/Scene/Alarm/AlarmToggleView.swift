@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AlarmToggleView: View {
     
-    @Binding var alarms: Alarms
+    @ObservedObject var alarms: Alarms
     @ObservedObject var alarm: Alarm
     @Binding var isDeleting: Bool
     @State private var isSheetPresented: Bool = false
@@ -124,8 +124,8 @@ extension AlarmToggleView {
     }
     
     func removeAlarm() {
-        UserDefaults.removeAlarm(alarm.id)
         alarms.data.removeAll() { $0.id == alarm.id }
+        UserDefaults.removeAlarm(alarm.id)
     }
     
     func updateAlarm() {

@@ -15,7 +15,7 @@ struct AlarmMainDetailView: View {
     @Binding var isPresentingSheet: Bool
     @Binding var isSettingAlarm: Bool
     @Binding var isDeletingAlarm: Bool
-    @Binding var alarms: Alarms
+    @ObservedObject var alarms: Alarms
     
     var body: some View {
         
