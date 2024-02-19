@@ -37,7 +37,7 @@ struct AlarmToggleView: View {
                     Spacer()
                     Button {
                         withAnimation {
-                            alarms.removeAll() { $0.id == alarm.id }
+                            removeAlarm()
                             alarms.sort(by: <)
                             if alarms.isEmpty {
                                 isDeleting = false
@@ -57,6 +57,9 @@ struct AlarmToggleView: View {
                     .toggleStyle(SwitchToggleStyle(tint: Color.green))
                     .onTapGesture {
                         isSheetPresented = false
+                    }
+                    .onReceive(alarm.$isOn) { isOn in
+                        NotificationService.shared.scheduleAlarm(alarm, isOn)
                     }
             }
         }
@@ -117,5 +120,10 @@ extension AlarmToggleView {
     
     func minute() -> String {
         alarm.minute < 10 ? "0\(alarm.minute)" : "\(alarm.minute)"
+    }
+    
+    func removeAlarm() {
+        UserDefaults.removeAlarm(alarm.id)
+        alarms.removeAll() { $0.id == alarm.id }
     }
 }

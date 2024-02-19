@@ -7,19 +7,32 @@
 
 import SwiftUI
 
+struct AlarmModel: Codable {
+    var timeSection: Int
+    var hour: Int
+    var minute: Int
+    var isOn: Bool
+    var id = UUID()
+    
+    func toAlarm() -> Alarm {
+        Alarm(timeSection: timeSection, hour: hour, minute: minute, isOn: isOn, id: id)
+    }
+}
+
 class Alarm: ObservableObject, Identifiable {
     @Published var timeSection: Int
     @Published var hour: Int
     @Published var minute: Int
     @Published var isOn: Bool
     
-    let id = UUID()
+    let id: UUID
     
-    init(timeSection: Int, hour: Int, minute: Int, isOn: Bool) {
+    init(timeSection: Int, hour: Int, minute: Int, isOn: Bool, id: UUID) {
         self.timeSection = timeSection
         self.hour = hour
         self.minute = minute
         self.isOn = isOn
+        self.id = id
     }
     
     static func <(lhs: Alarm, rhs: Alarm) -> Bool {

@@ -32,12 +32,7 @@ struct AlarmMainPickerView: View {
                     
                     ControlButton(icon: Icon.plus) {
                         withAnimation {
-                            alarms.append(Alarm(
-                                timeSection: selectedAmPm,
-                                hour: selectedHour,
-                                minute: selectedMinute,
-                                isOn: true)
-                            )
+                            addAlarm()
                             alarms.sort(by: <)
                             isSettingAlarm.toggle()
                         }
@@ -56,12 +51,7 @@ struct AlarmMainPickerView: View {
                     
                     ControlButton(icon: Icon.plus) {
                         withAnimation {
-                            alarms.append(Alarm(
-                                timeSection: selectedAmPm,
-                                hour: selectedHour,
-                                minute: selectedMinute,
-                                isOn: true)
-                            )
+                            addAlarm()
                             alarms.sort(by: <)
                             isSettingAlarm.toggle()
                         }
@@ -84,12 +74,7 @@ struct AlarmMainPickerView: View {
                     
                     ControlButton(icon: Icon.plus) {
                         withAnimation {
-                            alarms.append(Alarm(
-                                timeSection: selectedAmPm,
-                                hour: selectedHour,
-                                minute: selectedMinute,
-                                isOn: true)
-                            )
+                            addAlarm()
                             alarms.sort(by: <)
                             isSettingAlarm.toggle()
                         }
@@ -99,5 +84,16 @@ struct AlarmMainPickerView: View {
             }
             Spacer()
         }
+    }
+    
+    func addAlarm() {
+        let alarm = AlarmModel(
+            timeSection: selectedAmPm,
+            hour: selectedHour,
+            minute: selectedMinute,
+            isOn: true)
+        
+        UserDefaults.addAlarm(alarm)
+        alarms.append(alarm.toAlarm())
     }
 }

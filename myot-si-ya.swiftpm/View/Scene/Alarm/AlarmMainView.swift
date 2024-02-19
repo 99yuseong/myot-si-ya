@@ -79,6 +79,9 @@ struct AlarmMainView: View {
                 .background(Color.bg)
             }
         }
+        .onAppear {
+            alarms = UserDefaults.getAlarmsData()
+        }
     }
 }
 

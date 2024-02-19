@@ -139,6 +139,7 @@ struct TimerProgressView: View {
                                     
                                     if remainingTime == 0 {
                                         isTimeOver = true
+//                                        NotificationService.shared.sendNotification()
                                         effectTimer()
                                     }
                                     
