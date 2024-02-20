@@ -47,6 +47,7 @@ struct TimerProgressView: View {
                                 ControlButton(icon: Icon.pause, toggleIcon: Icon.play) {
                                     if !isPaused {
                                         timerCancellable?.cancel()
+                                        NotificationService.shared.removeTimer()
                                     } else {
                                         setTimer()
                                     }
@@ -125,8 +126,10 @@ struct TimerProgressView: View {
     }
     
     fileprivate func setTimer() {
+        NotificationService.shared.removeTimer()
         isTimeOver = false
-        timerCancellable = Timer.publish(every: 1, on: .current, in: .common)
+        NotificationService.shared.addTimer(after: remainingTime)
+        timerCancellable = Timer.publish(every: 1, on: .main, in: .common)
                             .autoconnect()
                             .sink { _ in
                                 if remainingTime > 0 {
@@ -139,7 +142,6 @@ struct TimerProgressView: View {
                                     
                                     if remainingTime == 0 {
                                         isTimeOver = true
-//                                        NotificationService.shared.sendNotification()
                                         effectTimer()
                                     }
                                     
@@ -150,10 +152,12 @@ struct TimerProgressView: View {
     }
 
     fileprivate func effectTimer() {
-        fontSize1 = 0
-        fontSize2 = 0
-        fontSize3 = 0
-        fontSize4 = 0
+        DispatchQueue.main.async {
+            fontSize1 = 0
+            fontSize2 = 0
+            fontSize3 = 0
+            fontSize4 = 0
+        }
         
         let tasks: [() -> Void] = [
             { fontSize1 = 180 },
@@ -166,15 +170,17 @@ struct TimerProgressView: View {
         
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             
-            if idx == 0 {
-                audioSerVice?.playAudio(fileName: "Timer", playCount: 1)
-            }
-            
-            tasks[idx]()
-            idx += 1
-            
-            if idx >= tasks.count {
-                timer.invalidate()
+            DispatchQueue.main.async {
+                if idx == 0 {
+                    audioSerVice?.playAudio(fileName: "Timer", playCount: 1)
+                }
+                
+                tasks[idx]()
+                idx += 1
+                
+                if idx >= tasks.count {
+                    timer.invalidate()
+                }
             }
         }
     }

@@ -13,7 +13,7 @@ struct AboutMainClockView: View {
     @Binding var brightness: Double
     @Binding var isMuted: Bool
     
-    @State var timer = Timer.publish(every: 1, on: .current, in: .common).autoconnect()
+    @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     let player: AudioService
     

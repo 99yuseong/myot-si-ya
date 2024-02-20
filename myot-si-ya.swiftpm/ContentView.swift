@@ -10,14 +10,14 @@ import Combine
 
 struct ContentView: View {
     @State private var isTabBarVisible: Bool = false
-    @State private var selectedTab = 0
+    @EnvironmentObject var appState: AppState
     @State private var timerCancellable: AnyCancellable?
     
     var body: some View {
         let binding = Binding<Int>(
-            get: { self.selectedTab },
+            get: { self.appState.selectedTab },
             set: {
-                self.selectedTab = $0
+                self.appState.selectedTab = $0
                 self.setTimer()
             }
         )

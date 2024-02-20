@@ -46,7 +46,7 @@ class NotificationService {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { granted, _ in
             if granted {
                 let content = UNMutableNotificationContent()
-                content.title = "알람"
+                content.title = "Alarm"
                 content.body = "\(alarm.hour):\(alarm.minute) \(alarm.timeSection == 0 ? "AM":"PM")"
                 content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "Timer.mp3"))
                 
@@ -56,7 +56,7 @@ class NotificationService {
                 dateComponents.minute = alarm.minute
                 
                 let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-                let request = UNNotificationRequest(identifier: alarm.id.uuidString, content: content, trigger: trigger)
+                let request = UNNotificationRequest(identifier: "alarm" + alarm.id.uuidString, content: content, trigger: trigger)
                 
                 UNUserNotificationCenter.current().add(request)
             }
@@ -67,6 +67,29 @@ class NotificationService {
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [alarm.id.uuidString])
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarm.id.uuidString])
     }
+    
+    func addTimer(after seconds: Int) {
+        print("timer set after\(seconds)")
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { granted, _ in
+            if granted {
+                let content = UNMutableNotificationContent()
+                content.title = "Timer"
+                content.body = "The set time has ended!"
+//                content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "Timer.mp3"))
+                
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds), repeats: false)
+                let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)
+                
+                UNUserNotificationCenter.current().add(request)
+            }
+        }
+    }
+    
+    func removeTimer() {
+        print("timer removed")
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["timer"])
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
+    }
 }
 
 class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
@@ -76,6 +99,23 @@ class NotificationDelegate: NSObject, UNUserNotificationCenterDelegate {
         withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
     ) {
         completionHandler([.banner, .sound])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        if response.notification.request.identifier.hasPrefix("alarm") {
+            DispatchQueue.main.async {
+                AppState.shared.selectedTab = 1
+            }
+        }
+        
+        if response.notification.request.identifier.hasPrefix("timer") {
+            DispatchQueue.main.async {
+                AppState.shared.selectedTab = 2
+            }
+        }
+        
+        completionHandler()
     }
 }
 
