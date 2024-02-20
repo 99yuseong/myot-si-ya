@@ -10,7 +10,7 @@ import SwiftUI
 struct TimerMainView: View {
     @State private var selectedHour = 0
     @State private var selectedMinute = 0
-    @State private var selectedSecond = 1
+    @State private var selectedSecond = 10
     @State private var remainingTime = 0
     @State private var totalTime = 0
     

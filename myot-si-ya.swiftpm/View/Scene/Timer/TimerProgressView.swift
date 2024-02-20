@@ -146,18 +146,17 @@ struct TimerProgressView: View {
                                     }
                                     
                                 } else {
+                                    audioSerVice?.playAudio(fileName: "Timer", playCount: 1)
                                     effectTimer()
                                 }
                             }
     }
 
     fileprivate func effectTimer() {
-        DispatchQueue.main.async {
-            fontSize1 = 0
-            fontSize2 = 0
-            fontSize3 = 0
-            fontSize4 = 0
-        }
+        fontSize1 = 0
+        fontSize2 = 0
+        fontSize3 = 0
+        fontSize4 = 0
         
         let tasks: [() -> Void] = [
             { fontSize1 = 180 },
@@ -169,18 +168,12 @@ struct TimerProgressView: View {
         var idx = 0
         
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            
-            DispatchQueue.main.async {
-                if idx == 0 {
-                    audioSerVice?.playAudio(fileName: "Timer", playCount: 1)
-                }
+        
+            tasks[idx]()
+            idx += 1
                 
-                tasks[idx]()
-                idx += 1
-                
-                if idx >= tasks.count {
-                    timer.invalidate()
-                }
+            if idx >= tasks.count {
+            timer.invalidate()
             }
         }
     }

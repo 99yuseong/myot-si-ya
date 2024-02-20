@@ -75,7 +75,7 @@ class NotificationService {
                 let content = UNMutableNotificationContent()
                 content.title = "Timer"
                 content.body = "The set time has ended!"
-//                content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "Timer.mp3"))
+                content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "Timer.mp3"))
                 
                 let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(seconds), repeats: false)
                 let request = UNNotificationRequest(identifier: "timer", content: content, trigger: trigger)

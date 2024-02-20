@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-struct ContentView: View {
+struct MainTabView: View {
     @State private var isTabBarVisible: Bool = false
     @EnvironmentObject var appState: AppState
     @State private var timerCancellable: AnyCancellable?
@@ -101,5 +101,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    MainTabView()
 }
