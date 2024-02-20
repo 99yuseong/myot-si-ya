@@ -47,7 +47,7 @@ class NotificationService {
             if granted {
                 let content = UNMutableNotificationContent()
                 content.title = "Alarm"
-                content.body = "\(alarm.hour):\(alarm.minute) \(alarm.timeSection == 0 ? "AM":"PM")"
+                content.body = Date().toFormat("hh:mm a")
                 content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "Timer.mp3"))
                 
                 var dateComponents = DateComponents()
@@ -64,12 +64,11 @@ class NotificationService {
     }
     
     private func removeAlarm(_ alarm: Alarm) {
-        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [alarm.id.uuidString])
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarm.id.uuidString])
+        UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["alarm" + alarm.id.uuidString])
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["alarm" + alarm.id.uuidString])
     }
     
     func addTimer(after seconds: Int) {
-        print("timer set after\(seconds)")
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { granted, _ in
             if granted {
                 let content = UNMutableNotificationContent()
@@ -86,7 +85,6 @@ class NotificationService {
     }
     
     func removeTimer() {
-        print("timer removed")
         UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: ["timer"])
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["timer"])
     }
