@@ -134,7 +134,7 @@ extension TimerSheetThirdPage {
         }
         
         if selectedSecond != 0 {
-            koreanTime += " " + koreanMinute() + "초"
+            koreanTime += " " + koreanSecond() + "초"
         }
         
         return koreanTime
