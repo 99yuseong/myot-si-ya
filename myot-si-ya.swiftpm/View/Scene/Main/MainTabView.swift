@@ -26,9 +26,9 @@ struct MainTabView: View {
             TabView(selection: binding) {
                 AboutMainView()
                     .tabItem {
-                        Image(systemName: Icon.about)
+                        Image(systemName: Icon.clock)
                             .font(.system(size: 32, weight: .thin))
-                        Text("About")
+                        Text("Clock")
                     }
                     .tag(0)
                     .toolbar(isTabBarVisible ? .visible : .hidden, for: .tabBar)
@@ -83,7 +83,7 @@ struct MainTabView: View {
                 }
             }
         }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea([.top, .leading, .trailing])
     }
 
     func setTimer() {

@@ -29,4 +29,5 @@ enum Icon {
     static var stopWatch = "stopwatch"
     static var timer = "timer"
     static var alarm = "alarm"
+    static var clock = "clock"
 }

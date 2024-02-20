@@ -18,7 +18,7 @@ struct AboutMainView: View {
     var body: some View {
         ZStack {
             GeometryReader { gr in
-                if gr.size.width < gr.size.height || isPortrait {
+                if gr.size.width < gr.size.height {
                     VStack {
                         if isScreenMode {
                             HStack {

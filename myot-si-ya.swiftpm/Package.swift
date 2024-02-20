@@ -8,13 +8,13 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "myot-si-ya",
+    name: "MyotSiYa",
     platforms: [
         .iOS("16.0")
     ],
     products: [
         .iOSApplication(
-            name: "myot-si-ya",
+            name: "MyotSiYa",
             targets: ["AppModule"],
             bundleIdentifier: "com.yuseong.com.myot-si-ya",
             teamIdentifier: "Q6CK9777WL",
