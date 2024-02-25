@@ -8,6 +8,13 @@
 
 해당 로고는 현재 시각을 물어보는 `몇시야?`의 초성인 `ㅁ`, `ㅅ`, `ㅇ`을 이용하여 시계의 모양을 형상화한 디자인입니다. <br/>
 
+<br/>
+
+## Demo
+[Youtube](https://youtu.be/jxlQV6X1QxI)
+
+<br/>
+
 ## Spec
 <a href="https://developer.apple.com/kr/swift/"><img src="https://img.shields.io/badge/Swift-FA7343?style=flat&logo=Swift&logoColor=white"/></a>
 <a href="https://developer.apple.com/kr/xcode/swiftui/"><img src="https://img.shields.io/badge/SwiftUI-0D96F6?style=flat&logo=Swift&logoColor=black"/></a>
@@ -15,6 +22,8 @@
 
 - Xcode 15 App Playground
 - Runnable: iPad Pro(12.9 inch, 11 inch), iPad Mini
+
+<br/>
 
 ## Details
 
@@ -26,11 +35,15 @@
 
 <img src="/Assets/hangeul_clock_main_view.PNG" width="512px"/>
 
+<br/>
+
 ### Alarm
 `Alarm` 탭에서는 한글 시간 Picker를 이용해 알람을 맞출 수 있습니다. <br/>
 프리셋으로 오전 7시, 오후 12시를 맞출 수 있습니다.
 
 <img src="/Assets/hangeul_alarm_setting_view.PNG" width="512px"/>
+
+<br/>
 
 ### Timer
 `Timer` 탭에서는 한글 시간 Picker를 이용해 타이머를 맞출 수 있습니다. <br/>
@@ -38,9 +51,13 @@
 
 <img src="/Assets/hangeul_timer_runnig_view.PNG" width="512px"/>
 
+<br/>
+
 ## Assets
 - SF Symbols: from [Apple](https://developer.apple.com/design/resources/)
 - SB Aggro Fonts: from [SANDBOX](https://sandbox.co.kr/font)
+
+<br/>
 
 ## License
 [License](https://github.com/99yuseong/myot-si-ya/blob/main/LICENSE)
