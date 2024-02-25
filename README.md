@@ -1,86 +1,46 @@
-## ⚡ Git Issue Template
+## Myot-Si-Ya: Hangeul Clock
 
-```
-## Description
-> 작업할 Feature에 대한 설명을 적어주세요.
-> ex. json 파일 적용
+`Myot-Si-Ya(몇시야?)`는 한글로 디자인된 시계입니다. <br/>
+단순히 시간을 알려주는 기능을 넘어, 한국어를 배우고자 하는 외국인들에게 한국의 숫자, 시간 체계에 대한 학습 기회를 제공하려는 목표를 가지고 있습니다. <br/>
+일상 생활에서 자주 사용하는 시계, 알람, 타이머등의 기능을 통해 좀더 한국어에 친숙해지고, 더 큰 흥미와 동기를 부여받을 수 있기를 바랍니다. <br/>
 
-## Progress
-- [ ] todo1
-- [ ] todo2
-- [ ] todo3
+<img src="/Assets/Logo.png" width="256px"/>
 
-## Expected-Period
-> 예상 작업 기간을 적어주세요
-> ~ MM/DD(E) ex. ~ 08/14(일)
-```
+해당 로고는 현재 시각을 물어보는 `몇시야?`의 초성인 `ㅁ`, `ㅅ`, `ㅇ`을 이용하여 시계의 모양을 형상화한 디자인입니다. <br/>
 
-## ⚡ Commit Message Rule
-  `<커밋분류>: #<이슈번호> <커밋메세지>`   
-```
-# ------- 제목 -------
-# "커밋타입: #이슈번호 제목"
-# 50자 이내 영어
-# 제목 끝에 마침표(.) 금지
-# 타입의 첫 글자는 반드시 대문자로 작성
+## Spec
+<a href="https://developer.apple.com/kr/swift/"><img src="https://img.shields.io/badge/Swift-FA7343?style=flat&logo=Swift&logoColor=white"/></a>
+<a href="https://developer.apple.com/kr/xcode/swiftui/"><img src="https://img.shields.io/badge/SwiftUI-0D96F6?style=flat&logo=Swift&logoColor=black"/></a>
+<a href="https://developer.apple.com/kr/xcode/"><img src="https://img.shields.io/badge/Xcode-147EFB?style=flat&logo=Xcode&logoColor=white"/></a>
 
-# Feat     : 새로운 기능 추가
-# Fix      : 버그 수정
-# Docs     : README 등 문서 수정
-# Design   : UI 디자인 변경
-# Style    : 코드의 의미에 영향을 주지 않는 변경 사항
-# Comment  : 주석 추가 및 변경
-# Refactor : 코드 리팩토링
-# Rename   : 파일 혹은 폴더명 수정
-# Remove   : 파일 혹은 폴더 삭제
-# Resource : 리소스 추가 및 변경 등 코드를 사용하지 않는 리소스에 대한 모든 것
-# Chore    : src 또는 테스트 파일을 수정하지 않는 기타 변경사항
-# !HOTFIX  : 급하게 치명적인 버그를 고쳐야 하는 경우
+- Xcode 15 App Playground
+- Runnable: iPad Pro(12.9 inch, 11 inch), iPad Mini
 
-# ---- 한 줄 띄우기 ----
-# 제목과 본문 사이 한 줄 띄우기
+## Details
 
-# ------- 본문 -------
-# "무엇을", "왜"를 자세하게 설명
-# 한 줄당 72자 이내 한/영
-# 여러 줄의 메세지는 "-"로 구분
+해당 앱은 `Clock`, `Alarm`, `Timer` 총 3개의 탭으로 구성되어 있습니다. <br/>
 
-# 예)
-# Feat: #42 Add textfield at loginview
-#
-# - 텍스트 필드의 emailText 변수는 LoginStateHolder와 연결되어 있습니다.
-# - 로그인 Password 텍스트 필드가 SecureField로 추가가 필요합니다.
+### Clock
+`Clock` 탭에서는 스크린 모드를 사용하여 탁상 시계 기능을 사용할 수 있습니다. <br/>
+밝기를 조절하는 기능을 이용할 수 있습니다.
 
-################
-```
- </div>
+<img src="/Assets/hangeul_clock_main_view.PNG" width="512px"/>
 
-## ⚡ Git Flow
- 
- ```
-1. 작업 시작 전 Git Issue 생성
-  - Issue 탭, 우측 상단 New issue
-  - 적합합 template Get started 버튼 클릭
-  - 내용 작성 및 Assignees(담당자), Labels 설정, Projects 연결
-  - 생성된 이슈 번호 기억하기!
+### Alarm
+`Alarm` 탭에서는 한글 시간 Picker를 이용해 알람을 맞출 수 있습니다. <br/>
+프리셋으로 오전 7시, 오후 12시를 맞출 수 있습니다.
 
-2. Github Projects
-  - 칸반보드에서 작업할 이슈 In Progress로 이동
+<img src="/Assets/hangeul_alarm_setting_view.PNG" width="512px"/>
 
-3. 로컬에서 Dev branch 최신화: git pull 받기
+### Timer
+`Timer` 탭에서는 한글 시간 Picker를 이용해 타이머를 맞출 수 있습니다. <br/>
+타이머 작동 시작 시, 남은 시간을 확인할 수 있습니다.
 
-4. 작업 브랜치 생성
-  - Feat/<작업내용>, Refactor/<작업내용>, Bug/<작업내용>...
+<img src="/Assets/hangeul_timer_runnig_view.PNG" width="512px"/>
 
-5. Add - Commit - Push - Pull Request 과정
-  - Commit template(.gitmessage)이용하여 커밋 메세지 작성 
-  - ex) Feat: #1 Add git_issue_template
-  - 팀별 Pull Request에 관한 내용은 자율로 진행.
+## Assets
+- SF Symbols: from [Apple](https://developer.apple.com/design/resources/)
+- SB Aggro Fonts: from [SANDBOX](https://sandbox.co.kr/font)
 
-6. Github Pull Request 탭에서 merge 및 issue 관리
-```
-   
- <br>
-
- </div>
- </details>
+## License
+[License](https://github.com/99yuseong/myot-si-ya/blob/main/LICENSE)
