@@ -8,16 +8,6 @@
 import SwiftUI
 
 extension Color {
-    static let bg = Color("bg")
-    static let gray1 = Color("gray1")
-    static let gray2 = Color("gray2")
-    static let gray3 = Color("gray3")
-    static let gray4 = Color("gray4")
-    static let gray5 = Color("gray5")
-    static let quaternary = Color("quaternary")
-}
-
-extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)
         _ = scanner.scanString("#")
