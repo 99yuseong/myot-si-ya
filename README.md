@@ -1,5 +1,9 @@
 ## Myot-Si-Ya: Hangeul Clock
-`Myot-Si-Ya(몇시야?)` 프로젝트는 2024년 Apple에서 주최하는 Swift Student Challenge 2024의 Winner로 선정된 프로젝트입니다. 처음으로 `SwiftUI`를 학습하며 `기획`, `디자인`, `개발`을 `2024년 1월 1일 ~ 2월 23일`동안 진행했습니다.
+`Myot-Si-Ya(몇시야?)` 프로젝트는 2024년 Apple에서 주최하는 Swift Student Challenge 2024의 Winner로 선정된 프로젝트입니다. 
+
+처음으로 `SwiftUI`를 학습하며 `기획`, `디자인`, `개발`을 
+<br/>
+`2024년 1월 1일 ~ 2월 23일`동안 진행했습니다.
 
 <img width="1512" alt="스크린샷 2024-11-16 13 42 51" src="https://github.com/user-attachments/assets/2dafe3f3-3d36-45b8-920f-15f2b215ac2d">
 
